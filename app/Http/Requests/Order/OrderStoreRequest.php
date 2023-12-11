@@ -27,13 +27,18 @@ class OrderStoreRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
+        $subtotal = str_replace(',', '', Cart::subtotal());
+        $total = str_replace(',', '', Cart::total());
+        $vat = str_replace(',', '', Cart::tax());
+        $pay = str_replace(',', '', $this->pay);
+
         $this->merge([
             'order_date' => Carbon::now()->format('Y-m-d'),
             'order_status' => OrderStatus::PENDING->value,
             'total_products' => Cart::count(),
-            'sub_total' => Cart::subtotal(),
-            'vat' => Cart::tax(),
-            'total' => Cart::total(),
+            'sub_total' => (int)$subtotal,
+            'vat' => (int)$vat,
+            'total' => (int)$total,
             'invoice_no' => IdGenerator::generate([
                 'table' => 'orders',
                 'field' => 'invoice_no',
@@ -41,7 +46,7 @@ class OrderStoreRequest extends FormRequest
                 'prefix' => 'INV-'
             ]),
             //'due' => ((int)Cart::total()) - ((int)$this->pay)
-            'due' => (filter_var(Cart::total(), FILTER_SANITIZE_NUMBER_INT) - filter_var($this->pay, FILTER_SANITIZE_NUMBER_INT) )
+            'due' => (int)($total - $pay )
         ]);
     }
 }

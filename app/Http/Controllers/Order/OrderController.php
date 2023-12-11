@@ -58,7 +58,8 @@ class OrderController extends Controller
             $oDetails['total'] = $content->subtotal;
             $oDetails['created_at'] = Carbon::now();
 
-            OrderDetails::insert($oDetails);
+            
+            OrderDetails::create($oDetails);
         }
 
         // Delete Cart Sopping History
@@ -83,12 +84,11 @@ class OrderController extends Controller
         // TODO refactoring
 
         // Reduce the stock
-        $products = OrderDetails::where('order_id', $order)->get();
+        $ods = $order->details;
+        foreach ($ods as $od) {
+           $product = Product::where('id', $od->product_id)->firstOrFail();
 
-        foreach ($products as $product) {
-            Product::where('id', $product->product_id)
-                    //->update(['stock' => DB::raw('stock-'.$product->quantity)]);
-                    ->update(['quantity' => DB::raw('quantity-'.$product->quantity)]);
+           $product->updateInventory($od->quantity);
         }
 
         $order->update([

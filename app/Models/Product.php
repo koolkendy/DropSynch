@@ -74,4 +74,15 @@ class Product extends Model
         $query->where('name', 'like', "%{$value}%")
             ->orWhere('code', 'like', "%{$value}%");
     }
+
+    public function updateInventory(int $quantity)
+    {
+        if ($this->quantity < $quantity) {
+            throw new \Exception("Insufficient stock available");
+        }
+
+        $this->update([
+            'quantity' => $this->quantity - $quantity,
+        ]);
+    }
 }

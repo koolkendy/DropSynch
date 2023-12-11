@@ -106,16 +106,8 @@
                                                 {{ $item->name }}
                                             </td>
                                             <td style="min-width: 170px;">
-                                                <form action="{{ route('pos.updateCartItem', $item->rowId) }}" method="POST">
-                                                    @csrf
                                                     <div class="input-group">
-                                                        <input type="number" class="form-control" name="qty" required value="{{ old('qty', $item->qty) }}">
-
-                                                        <div class="input-group-append text-center">
-                                                            <button type="submit" class="btn btn-icon btn-success border-none" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sumbit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-                                                            </button>
-                                                        </div>
+                                                        <input type="number" class="form-control" name="qty[{{$loop->index}}]" required value="{{ old('qty['.$loop->index.']', $item->qty) }}">
                                                     </div>
                                                 </form>
                                             </td>
@@ -126,13 +118,10 @@
                                                 {{ $item->subtotal }}
                                             </td>
                                             <td class="text-center">
-                                                <form action="{{ route('pos.deleteCartItem', $item->rowId) }}" method="POST">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-icon btn-outline-danger " onclick="return confirm('Are you sure you want to delete this record?')">
+                                                    <button type="submit" class="btn btn-icon btn-outline-danger " onclick="return confirm('Are you sure you want to delete this record? (not working)')">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                                     </button>
-                                                </form>
+                                     
                                             </td>
                                         </tr>
                                         @empty

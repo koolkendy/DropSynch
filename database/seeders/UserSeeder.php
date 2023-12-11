@@ -22,15 +22,15 @@ class UserSeeder extends Seeder
                 'created_at' => now()
             ],
             [
-                'name' => 'quest',
-                'email' => 'quest@quest.com',
+                'name' => 'Dropshipper 1',
+                'email' => 'dropshipper1@example.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'created_at' => now()
             ],
             [
-                'name' => 'user',
-                'email' => 'user@user.com',
+                'name' => 'Dropshipper 2',
+                'email' => 'dropshipper2@example.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'created_at' => now()
