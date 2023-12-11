@@ -21,23 +21,29 @@ Inventory Management System with Laravel 10 and MySql.
 
 1. Clone Repository `git clone https://github.com/mjc169/inventory-management-system`
 2. Go into the repository `cd inventory-management-system`
+3. Update Packages via `composer update` or Install Packages `composer install`
+4. Copy `.env` file `cp .env.example .env`
+5. Generate app key `php artisan key:generate`
 
-3. Install Packages `composer update`
-   or
-4. Install Packages `composer install`
+6. Run your Xampp/Laragon to run your MYSQL for the database.
+7. Create a database named `inventory_management_system` or should be the same in .env "DB_DATABASE="
+8. Set up your database credentials in your `.env` file. By default:
 
-5. Copy `.env` file `cp .env.example .env`
-6. Generate app key `php artisan key:generate`
-7. Setting up your database credentials in your `.env` file.
-   7a Run your Xampp/Laragon to run your MYSQL for the database.
-   7b Create a database named "inventory_management_system" or depends on the name in your .env file under "DB_DATABASE="
-8. Seed Database: `php artisan migrate:fresh --seed`
-9. Create Storage Link `php artisan storage:link`
-   10a. Install `npm i laravel-datatables-vite`
-   10b Install NPM dependencies `npm install && npm run dev`
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=inventory_management_system
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-10. Run another CMD terminal and run `php artisan serve`
-11. Try login with email: `admin@admin.com` and password: `password`
+9. Run Seed Database: `php artisan migrate:fresh --seed`
+10. Create Storage Link `php artisan storage:link`
+11. Install `npm i laravel-datatables-vite`
+12. Install NPM dependencies `npm install && npm run dev`
+13. Run another CMD terminal and run `php artisan serve`
+14. Try login with email: `admin@admin.com` and password: `password`
 
 ## 🚀 Config
 
