@@ -312,7 +312,7 @@
                                     </div>
                                 </li>
 
-
+                                */ ?>
                                 <li class="nav-item dropdown {{ request()->is('users*', 'categories*', 'units*') ? 'active' : null }}">
                                     <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -347,7 +347,7 @@
                                         </div>
                                     </div>
                                 </li>
-                            </ul> */ ?>
+                            </ul>
 
                             <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                                 <form action="./" method="get" autocomplete="off" novalidate>

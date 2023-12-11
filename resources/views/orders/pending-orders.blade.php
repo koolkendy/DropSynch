@@ -69,7 +69,7 @@
                             <td class="text-center">{{ Number::currency($order->total, 'PHP') }}</td>
                             <td class="text-center">
                                 <span class="badge bg-orange text-white text-uppercase">
-                                    {{ $order->order_status }}
+                                    {{ $order->order_status->label() }}
                                 </span>
                             </td>
                             <td class="text-center">

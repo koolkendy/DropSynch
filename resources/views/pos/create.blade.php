@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="col-lg-6 col-sm-6">
                                         <div class="invoice">
-                                            <h1>Invoice # <span>123456</span></h1>
+                                            <h1>Invoice # <span></span></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                         <p class="inv-from-1">Name Store</p>
                                         <p class="inv-from-1">(+62) 123 123 123</p>
                                         <p class="inv-from-1">email@example.com</p>
-                                        <p class="inv-from-2">Cirebon, Jawa Barat, Indonesia</p>
+                                        <p class="inv-from-2">Angeles City, Philippines</p>
                                     </div>
                                 </div>
                             </div>

@@ -41,7 +41,7 @@ class OrderStoreRequest extends FormRequest
                 'prefix' => 'INV-'
             ]),
             //'due' => ((int)Cart::total()) - ((int)$this->pay)
-            'due' => (Cart::total() - $this->pay)
+            'due' => (filter_var(Cart::total(), FILTER_SANITIZE_NUMBER_INT) - filter_var($this->pay, FILTER_SANITIZE_NUMBER_INT) )
         ]);
     }
 }
