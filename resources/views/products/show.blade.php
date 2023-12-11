@@ -95,10 +95,12 @@
                                         <td><span class="text-secondary">Code</span></td>
                                         <td>{{ $product->code }}</td>
                                     </tr>
+                                    <?php /*
                                     <tr>
                                         <td>Barcode</td>
                                         <td>{!! $barcode !!}</td>
                                     </tr>
+                                    */?>
                                     <tr>
                                         <td>Category</td>
                                         <td>
