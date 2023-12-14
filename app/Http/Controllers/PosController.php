@@ -58,6 +58,30 @@ class PosController extends Controller
             ->with('success', 'Product has been added to cart!');
     }
 
+    public function resellerAddCartItem (Request $request)
+    {
+        $request->all();
+        //dd($request);
+
+        $rules = [
+            'id' => 'required|numeric',
+            'name' => 'required|string',
+            'selling_price' => 'required|numeric',
+            'qty' => 'required|numeric',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        Cart::add($validatedData['id'],
+            $validatedData['name'],
+            $validatedData['qty'],
+            $validatedData['selling_price'],
+            1,
+            (array)$options = null);
+
+        return redirect()->route('reseller.showCart');
+    }
+
     public function updateCartItem(Request $request, $rowId)
     {
         $rules = [

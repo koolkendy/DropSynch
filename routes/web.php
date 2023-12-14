@@ -8,6 +8,7 @@ use App\Http\Controllers\Order\DueOrderController;
 use App\Http\Controllers\Order\OrderCompleteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderPendingController;
+use App\Http\Controllers\Reseller\ResellerController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductExportController;
@@ -72,7 +73,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Route::post('/pos/invoice', [PosController::class, 'createInvoice'])->name('pos.createInvoice');
     Route::post('invoice/create/', [InvoiceController::class, 'create'])->name('invoice.create');
-
+    Route::post('reseller/createInvoice', [InvoiceController::class, 'resellerCreate'])->name('reseller.createInvoice');
     // Route Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/pending', OrderPendingController::class)->name('orders.pending');
@@ -80,6 +81,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+    Route::post('/reseller/store', [OrderController::class, 'resellerStore'])->name('reseller.storeOrder');
+    
+    // Route Reseller
+    Route::get('/reseller/dashboard/{slug?}', [ResellerController::class, 'dashboard'])->name('reseller.dashboard');
+    Route::get('/reseller/product/{slug}', [ResellerController::class, 'product'])->name('reseller.product');
+    Route::post('/reseller/cart/add', [PosController::class, 'resellerAddCartItem'])->name('reseller.resellerAddCartItem');
+    Route::get('/reseller/cart', [ResellerController::class, 'cart'])->name('reseller.showCart');
 
     // SHOW ORDER
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');

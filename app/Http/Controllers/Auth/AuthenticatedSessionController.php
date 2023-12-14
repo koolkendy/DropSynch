@@ -29,7 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        
+        return redirect()->intended($this->redirectTo());
     }
 
     /**
@@ -44,5 +45,14 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function redirectTo()
+    {
+        if (Auth::user()->email === 'admin@admin.com') {
+            return RouteServiceProvider::HOME;
+        } else {
+            return '/reseller/dashboard';
+        }
     }
 }
