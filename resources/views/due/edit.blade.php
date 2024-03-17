@@ -65,7 +65,7 @@
                                 <label for="customer" class="form-label required">
                                     {{ __('user') }}
                         </label>
-                        <input type="text" id="customer" class="form-control" value="{{ $order->customer->name }}" disabled>
+                        <input type="text" id="customer" class="form-control" value="{{ $order->user->name }}" disabled>
                     </div>
                     ---}}
 
@@ -122,7 +122,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="6" class="text-end">
-                                    Payed amount
+                                    Paid amount
                                 </td>
                                 <td class="text-center">{{ number_format($order->pay, 2) }}</td>
                             </tr>

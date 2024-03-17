@@ -22,10 +22,10 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
 
-                if (auth()->user()->id < 1000) {
-                    return redirect(RouteServiceProvider::HOME);
-                } else
-                    return redirect(RouteServiceProvider::RESELLER);
+                //if (auth()->user()->id < 1000) {
+                return redirect(RouteServiceProvider::HOME);
+                // } else
+                //    return redirect(RouteServiceProvider::RESELLER);
             }
         }
 

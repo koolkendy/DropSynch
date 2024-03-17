@@ -34,52 +34,52 @@
         </div>
     </div>
 
-    <x-spinner.loading-spinner/>
+    <x-spinner.loading-spinner />
 
     <div class="table-responsive">
         <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
             <thead class="thead-light">
-            <tr>
-                <th class="align-middle text-center w-1">
-                    {{ __('No.') }}
-                </th>
-                <th scope="col" class="align-middle text-center">
-                    <a wire:click.prevent="sortBy('reference')" href="#" role="button">
-                        {{ __('Quotation No.') }}
-                        @include('inclues._sort-icon', ['field' => 'reference'])
-                    </a>
-                </th>
-                <th scope="col" class="align-middle text-center">
-                    <a wire:click.prevent="sortBy('date')" href="#" role="button">
-                        {{ __('Date') }}
-                        @include('inclues._sort-icon', ['field' => 'date'])
-                    </a>
-                </th>
-                <th scope="col" class="align-middle text-center">
-                    <a wire:click.prevent="sortBy('customer_name')" href="#" role="button">
-                        {{ __('Customer name') }}
-                        @include('inclues._sort-icon', ['field' => 'customer_name'])
-                    </a>
-                </th>
-                <th scope="col" class="align-middle text-center">
-                    <a wire:click.prevent="sortBy('total')" href="#" role="button">
-                        {{ __('Total amount') }}
-                        @include('inclues._sort-icon', ['field' => 'total_amount'])
-                    </a>
-                </th>
-                <th scope="col" class="align-middle text-center">
-                    <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
-                        {{ __('Status') }}
-                        @include('inclues._sort-icon', ['field' => 'order_status'])
-                    </a>
-                </th>
-                <th scope="col" class="align-middle text-center">
-                    {{ __('Action') }}
-                </th>
-            </tr>
+                <tr>
+                    <th class="align-middle text-center w-1">
+                        {{ __('No.') }}
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('reference')" href="#" role="button">
+                            {{ __('Quotation No.') }}
+                            @include('inclues._sort-icon', ['field' => 'reference'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('date')" href="#" role="button">
+                            {{ __('Date') }}
+                            @include('inclues._sort-icon', ['field' => 'date'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('customer_name')" href="#" role="button">
+                            {{ __('Customer name') }}
+                            @include('inclues._sort-icon', ['field' => 'customer_name'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('total')" href="#" role="button">
+                            {{ __('Total amount') }}
+                            @include('inclues._sort-icon', ['field' => 'total_amount'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
+                            {{ __('Status') }}
+                            @include('inclues._sort-icon', ['field' => 'order_status'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        {{ __('Action') }}
+                    </th>
+                </tr>
             </thead>
             <tbody>
-            @forelse ($quotations as $quotation)
+                @forelse ($quotations as $quotation)
                 <tr>
                     <td class="align-middle text-center">
                         {{ $loop->iteration }}
@@ -91,7 +91,7 @@
                         {{ $quotation->date->format('d-m-Y') }}
                     </td>
                     <td class="align-middle text-center">
-                        {{ $quotation->customer->name }}
+                        {{ $quotation->user->name }}
                     </td>
                     <td class="align-middle text-center">
                         {{ Number::currency($quotation->total_amount, 'PHP') }}
@@ -102,18 +102,18 @@
                         </span>
                     </td>
                     <td class="align-middle text-center">
-                        <x-button.show class="btn-icon" route="{{ route('quotations.show', $quotation) }}"/>
-                        <x-button.edit class="btn-icon" route="{{ route('quotations.edit', $quotation) }}"/>
-                        <x-button.delete class="btn-icon" route="{{ route('quotations.destroy', $quotation) }}"/>
+                        <x-button.show class="btn-icon" route="{{ route('quotations.show', $quotation) }}" />
+                        <x-button.edit class="btn-icon" route="{{ route('quotations.edit', $quotation) }}" />
+                        <x-button.delete class="btn-icon" route="{{ route('quotations.destroy', $quotation) }}" />
                     </td>
                 </tr>
-            @empty
+                @empty
                 <tr>
                     <td class="align-middle text-center" colspan="8">
                         No results found
                     </td>
                 </tr>
-            @endforelse
+                @endforelse
             </tbody>
         </table>
     </div>
@@ -128,4 +128,3 @@
         </ul>
     </div>
 </div>
-

@@ -34,7 +34,7 @@
             <tr>
                 <x-table.td>{{ $loop->iteration }}</x-table.td>
                 <x-table.td>{{ $order->invoice_no }}</x-table.td>
-                <x-table.td>{{ $order->customer->name }}</x-table.td>
+                <x-table.td>{{ $order->user->name }}</x-table.td>
                 <x-table.td>{{ $order->order_date->format('d-m-Y') }}</x-table.td>
                 <x-table.td>{{ $order->payment_type }}</x-table.td>
                 <x-table.td>{{ Number::currency($order->total, 'PHP') }}</x-table.td>

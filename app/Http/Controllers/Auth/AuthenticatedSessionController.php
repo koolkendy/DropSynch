@@ -53,8 +53,8 @@ class AuthenticatedSessionController extends Controller
             return '/login';
 
         if (Auth::user()->id < 1000) {
-            return redirect(RouteServiceProvider::HOME);
+            return RouteServiceProvider::HOME;
         } else
-            return redirect(RouteServiceProvider::RESELLER);
+            return RouteServiceProvider::RESELLER;
     }
 }

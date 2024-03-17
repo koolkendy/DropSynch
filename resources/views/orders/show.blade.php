@@ -44,7 +44,6 @@
                     <x-action.close route="{{ route('orders.index') }}" />
                 </div>
             </div>
-
             <div class="card-body">
                 <div class="row row-cards mb-3">
                     <div class="col">
@@ -63,11 +62,33 @@
 
                     <div class="col">
                         <label for="customer" class="form-label required">
-                            {{ __('user') }}
+                            {{ __('Customer Name') }}
                         </label>
-                        <input type="text" id="customer" class="form-control" value="{{ $order->customer->name }}" disabled>
+                        <input type="text" id="customer" class="form-control" value="{{ $order->user->name }}" disabled>
                     </div>
 
+                    <div class="col">
+                        <label for="customer" class="form-label">
+                            {{ __('Order Status') }}
+                        </label>
+                        <x-status dot color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : 'orange' }}" class="text-uppercase">
+                            {{ $order->order_status->label() }}
+                        </x-status>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">
+                        {{ __('Payment Details') }}
+                    </h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row row-cards mb-3">
                     <div class="col">
                         <label for="payment_type" class="form-label required">
                             {{ __('Payment Type') }}
@@ -75,8 +96,31 @@
 
                         <input type="text" id="payment_type" class="form-control" value="{{ $order->payment_type }}" disabled>
                     </div>
-                </div>
 
+                    <div class="col">
+                        <label for="order_date" class="form-label required">
+                            {{ __('Reference Number') }}
+                        </label>
+                        <input type="text" id="reference_number" class="form-control" value="{{ $order->reference_number }}" disabled>
+                    </div>
+
+                    <div class="col">
+                        <label for="invoice_no" class="form-label required">
+                            {{ __('Account Number/Name') }}
+                        </label>
+                        <input type="text" id="account_number" class="form-control" value="{{ $order->account_number }}" disabled>
+                    </div>
+
+                    <div class="col">
+                        <label for="Amount Paid" class="form-label required">
+                            {{ __('Amount Transferred') }}
+                        </label>
+                        <input type="text" id="pay" class="form-control" value="{{ $order->pay }}" disabled>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered align-middle">
                         <thead class="thead-light">
@@ -120,7 +164,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="6" class="text-end">
-                                    Payed amount
+                                    Paid amount
                                 </td>
                                 <td class="text-center">{{ number_format($order->pay, 2) }}</td>
                             </tr>

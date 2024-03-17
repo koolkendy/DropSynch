@@ -36,7 +36,7 @@ class Order extends Model
         'order_status'  => OrderStatus::class
     ];
 
-    public function customer(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

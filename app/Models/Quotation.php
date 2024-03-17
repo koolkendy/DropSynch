@@ -49,7 +49,7 @@ class Quotation extends Model
         return $this->hasMany(QuotationDetails::class);
     }
 
-    public function customer(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

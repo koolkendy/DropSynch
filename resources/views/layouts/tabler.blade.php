@@ -201,7 +201,7 @@
             </div>
         </header>
 
-        <header class="navbar-expand-md">
+        @if(Auth::user()->id < 1000) <header class="navbar-expand-md">
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="navbar">
                     <div class="container-xl">
@@ -398,29 +398,30 @@
                     </div>
                 </div>
             </div>
-        </header>
+            </header>
+            @endif
 
-        <div class="page-wrapper">
-            <div>
-                @yield('content')
-            </div>
+            <div class="page-wrapper">
+                <div>
+                    @yield('content')
+                </div>
 
-            <footer class="footer footer-transparent d-print-none">
-                <div class="container-xl">
-                    <div class="row text-center align-items-center">
+                <footer class="footer footer-transparent d-print-none">
+                    <div class="container-xl">
+                        <div class="row text-center align-items-center">
 
-                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                            <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    Copyright &copy; {{ now()->year }}
-                                    All rights reserved.
-                                </li>
-                            </ul>
+                            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                                <ul class="list-inline list-inline-dots mb-0">
+                                    <li class="list-inline-item">
+                                        Copyright &copy; {{ now()->year }}
+                                        All rights reserved.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </footer>
-        </div>
+                </footer>
+            </div>
     </div>
 
     <!-- Libs JS -->

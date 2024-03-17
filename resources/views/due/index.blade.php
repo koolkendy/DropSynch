@@ -3,12 +3,7 @@
 @section('content')
 <div class="page-body">
     @if($orders->isEmpty())
-    <x-empty
-        title="No orders found"
-        message="Try adjusting your search or filter to find what you're looking for."
-        button_label="{{ __('Add your first Order') }}"
-        button_route="{{ route('orders.create') }}"
-    />
+    <x-empty title="No orders found" message="Try adjusting your search or filter to find what you're looking for." button_label="{{ __('Add your first Order') }}" button_route="{{ route('orders.create') }}" />
     @else
     <div class="container-xl">
         <div class="card">
@@ -46,7 +41,7 @@
                                 {{ $order->invoice_no }}
                             </td>
                             <td class="text-center">
-                                {{ $order->customer->name }}
+                                {{ $order->user->name }}
                             </td>
                             <td class="text-center">
                                 {{ $order->order_date->format('d-m-Y') }}
@@ -65,11 +60,11 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                <x-button.show class="btn-icon" route="{{ route('due.show', $order) }}"/>
-                                <x-button.edit class="btn-icon" route="{{ route('due.edit', $order) }}"/>
+                                <x-button.show class="btn-icon" route="{{ route('due.show', $order) }}" />
+                                <x-button.edit class="btn-icon" route="{{ route('due.edit', $order) }}" />
                             </td>
                         </tr>
-                      @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
