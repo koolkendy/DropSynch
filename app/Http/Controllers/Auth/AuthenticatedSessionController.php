@@ -52,10 +52,9 @@ class AuthenticatedSessionController extends Controller
         if (!Auth::user())
             return '/login';
 
-        if (Auth::user()->email === 'supplier1@dropsynch.com' || Auth::user()->email === 'supplier2@dropsynch.com') {
-            return RouteServiceProvider::HOME;
-        } else {
-            return '/reseller/dashboard';
-        }
+        if (Auth::user()->id < 1000) {
+            return redirect(RouteServiceProvider::HOME);
+        } else
+            return redirect(RouteServiceProvider::RESELLER);
     }
 }

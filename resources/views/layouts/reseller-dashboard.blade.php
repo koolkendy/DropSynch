@@ -93,7 +93,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                <a href="{{ Auth::user()->email === 'supplier1@dropsynch.com' || Auth::user()->email === 'supplier2@dropsynch.com'  ? url('/') : url('/reseller/dashboard') }}">
+                <a href="{{ Auth::user()->id < 1000  ? url('/') : url('/reseller/dashboard') }}">
                     <img src="{{ asset('static/logo.png') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
                     <span style="position:relative; top: 3px;">Dropsynch | Dropshipping System</span>
                 </a>

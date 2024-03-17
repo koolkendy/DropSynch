@@ -82,7 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
     Route::post('/reseller/store', [OrderController::class, 'resellerStore'])->name('reseller.storeOrder');
-    
+
     // Route Reseller
     Route::get('/reseller/dashboard/{slug?}', [ResellerController::class, 'dashboard'])->name('reseller.dashboard');
     Route::get('/reseller/product/{slug}', [ResellerController::class, 'product'])->name('reseller.product');
@@ -123,8 +123,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/purchases/delete/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.delete');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('test/', function (){
+Route::get('test/', function () {
     return view('test');
 });
