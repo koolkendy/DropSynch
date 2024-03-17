@@ -40,7 +40,7 @@
                         <!-- Profile picture help block -->
                         <div class="small font-italic text-muted mb-2">JPG or PNG no larger than 1 MB</div>
                         <!-- Profile picture input -->
-                        <input class="form-control form-control-solid mb-2 @error('photo') is-invalid @enderror" type="file"  id="image" name="photo" accept="image/*" onchange="previewImage();">
+                        <input class="form-control form-control-solid mb-2 @error('photo') is-invalid @enderror" type="file" id="image" name="photo" accept="image/*" onchange="previewImage();">
                         @error('photo')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -57,7 +57,10 @@
                         Account Details
                     </div>
                     <div class="card-body">
+
+
                         <!-- Form Group (username) -->
+                        <!--
                         <div class="mb-3">
                             <label class="small mb-1" for="username">Username</label>
                             <input class="form-control form-control-solid @error('username') is-invalid @enderror" id="username" name="username" type="text" placeholder="" value="{{ old('username', $user->username) }}" autocomplete="off" />
@@ -67,6 +70,7 @@
                             </div>
                             @enderror
                         </div>
+                        -->
                         <!-- Form Group (name) -->
                         <div class="mb-3">
                             <label class="small mb-1" for="name">Full name</label>
@@ -82,7 +86,7 @@
                                 Email address
                             </label>
 
-                            <input class="form-control form-control-solid @error('photo') is-invalid @enderror" id="email" name="email" type="text" placeholder="" value="{{ old('email', $user->email) }}"  autocomplete="off" />
+                            <input class="form-control form-control-solid @error('photo') is-invalid @enderror" id="email" name="email" type="text" placeholder="" value="{{ old('email', $user->email) }}" autocomplete="off" />
                             @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -102,5 +106,5 @@
 @endsection
 
 @push('page-scripts')
-    <script src="{{ asset('assets/js/img-preview.js') }}"></script>
+<script src="{{ asset('assets/js/img-preview.js') }}"></script>
 @endpush

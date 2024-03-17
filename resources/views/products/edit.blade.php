@@ -31,24 +31,13 @@
                                     {{ __('Product Image') }}
                                 </h3>
 
-                                <img class="img-account-profile mb-2"
-                                     src="{{ $product->product_image ? asset('storage/products/'.$product->product_image) : asset('assets/img/products/default.webp') }}"
-                                     alt=""
-                                     id="image-preview"
-                                >
+                                <img class="img-account-profile mb-2" src="{{ $product->product_image ? asset('storage/products/'.$product->product_image) : asset('assets/img/products/default.webp') }}" alt="" id="image-preview">
 
                                 <div class="small font-italic text-muted mb-2">
                                     JPG or PNG no larger than 2 MB
                                 </div>
 
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    id="image"
-                                    name="product_image"
-                                    class="form-control @error('product_image') is-invalid @enderror"
-                                    onchange="previewImage();"
-                                >
+                                <input type="file" accept="image/*" id="image" name="product_image" class="form-control @error('product_image') is-invalid @enderror" onchange="previewImage();">
 
                                 @error('product_image')
                                 <div class="invalid-feedback">
@@ -75,13 +64,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <input type="text"
-                                                   id="name"
-                                                   name="name"
-                                                   class="form-control @error('name') is-invalid @enderror"
-                                                   placeholder="Product name"
-                                                   value="{{ old('name', $product->name) }}"
-                                            >
+                                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Product name" value="{{ old('name', $product->name) }}">
 
                                             @error('name')
                                             <div class="invalid-feedback">
@@ -98,9 +81,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <select name="category_id" id="category_id"
-                                                    class="form-select @error('category_id') is-invalid @enderror"
-                                            >
+                                            <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror">
                                                 <option selected="" disabled="">Select a category:</option>
                                                 @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}" @if(old('category_id', $product->category_id) == $category->id) selected="selected" @endif>{{ $category->name }}</option>
@@ -123,15 +104,13 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <select name="unit_id" id="unit_id"
-                                                    class="form-select @error('unit_id') is-invalid @enderror"
-                                            >
+                                            <select name="unit_id" id="unit_id" class="form-select @error('unit_id') is-invalid @enderror">
                                                 <option selected="" disabled="">
                                                     Select a unit:
                                                 </option>
 
                                                 @foreach ($units as $unit)
-                                                    <option value="{{ $unit->id }}" @if(old('unit_id', $product->unit_id) == $unit->id) selected="selected" @endif>{{ $unit->name }}</option>
+                                                <option value="{{ $unit->id }}" @if(old('unit_id', $product->unit_id) == $unit->id) selected="selected" @endif>{{ $unit->name }}</option>
                                                 @endforeach
                                             </select>
 
@@ -150,13 +129,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <input type="text"
-                                                   id="buying_price"
-                                                   name="buying_price"
-                                                   class="form-control @error('buying_price') is-invalid @enderror"
-                                                   placeholder="0"
-                                                   value="{{ old('buying_price', $product->buying_price) }}"
-                                            >
+                                            <input type="text" id="buying_price" name="buying_price" class="form-control @error('buying_price') is-invalid @enderror" placeholder="0" value="{{ old('buying_price', $product->buying_price) }}">
 
                                             @error('buying_price')
                                             <div class="invalid-feedback">
@@ -173,13 +146,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <input type="text"
-                                                   id="selling_price"
-                                                   name="selling_price"
-                                                   class="form-control @error('selling_price') is-invalid @enderror"
-                                                   placeholder="0"
-                                                   value="{{ old('selling_price', $product->selling_price) }}"
-                                            >
+                                            <input type="text" id="selling_price" name="selling_price" class="form-control @error('selling_price') is-invalid @enderror" placeholder="0" value="{{ old('selling_price', $product->selling_price) }}">
 
                                             @error('selling_price')
                                             <div class="invalid-feedback">
@@ -196,14 +163,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <input type="number"
-                                                   id="quantity"
-                                                   name="quantity"
-                                                   class="form-control @error('quantity') is-invalid @enderror"
-                                                   min="0"
-                                                   value="{{ old('quantity', $product->quantity) }}"
-                                                   placeholder="0"
-                                            >
+                                            <input type="number" id="quantity" name="quantity" class="form-control @error('quantity') is-invalid @enderror" min="0" value="{{ old('quantity', $product->quantity) }}" placeholder="0">
 
                                             @error('quantity')
                                             <div class="invalid-feedback">
@@ -220,14 +180,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                            <input type="number"
-                                                   id="quantity_alert"
-                                                   name="quantity_alert"
-                                                   class="form-control @error('quantity_alert') is-invalid @enderror"
-                                                   min="0"
-                                                   placeholder="0"
-                                                   value="{{ old('quantity_alert', $product->quantity_alert) }}"
-                                            >
+                                            <input type="number" id="quantity_alert" name="quantity_alert" class="form-control @error('quantity_alert') is-invalid @enderror" min="0" placeholder="0" value="{{ old('quantity_alert', $product->quantity_alert) }}">
 
                                             @error('quantity_alert')
                                             <div class="invalid-feedback">
@@ -236,7 +189,7 @@
                                             @enderror
                                         </div>
                                     </div>
-
+                                    <!--
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label for="tax" class="form-label">
@@ -283,19 +236,14 @@
                                             @enderror
                                         </div>
                                     </div>
-
+                                    -->
                                     <div class="col-md-12">
                                         <div class="mb-3 mb-0">
                                             <label for="notes" class="form-label">
                                                 {{ __('Notes') }}
                                             </label>
 
-                                            <textarea name="notes"
-                                                      id="notes"
-                                                      rows="5"
-                                                      class="form-control @error('notes') is-invalid @enderror"
-                                                      placeholder="Product notes"
-                                            >{{ old('notes', $product->notes) }}</textarea>
+                                            <textarea name="notes" id="notes" rows="5" class="form-control @error('notes') is-invalid @enderror" placeholder="Product notes">{{ old('notes', $product->notes) }}</textarea>
 
                                             @error('notes')
                                             <div class="invalid-feedback">
@@ -326,5 +274,5 @@
 @endsection
 
 @pushonce('page-scripts')
-    <script src="{{ asset('assets/js/img-preview.js') }}"></script>
+<script src="{{ asset('assets/js/img-preview.js') }}"></script>
 @endpushonce

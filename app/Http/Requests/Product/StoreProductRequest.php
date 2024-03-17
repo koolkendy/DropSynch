@@ -48,7 +48,9 @@ class StoreProductRequest extends FormRequest
                 'field' => 'code',
                 'length' => 4,
                 'prefix' => 'PC'
-            ])
+            ]),
+            'tax'               => '12',
+            'tax_type'          => 0,
         ]);
     }
 }

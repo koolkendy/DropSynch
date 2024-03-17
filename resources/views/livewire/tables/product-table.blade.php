@@ -9,19 +9,19 @@
         <div class="card-actions btn-group">
             <div class="dropdown">
                 <a href="#" class="btn-action dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <x-icon.vertical-dots/>
+                    <x-icon.vertical-dots />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" style="">
                     <a href="{{ route('products.create') }}" class="dropdown-item">
-                        <x-icon.plus/>
+                        <x-icon.plus />
                         {{ __('Create Product') }}
                     </a>
                     <a href="{{ route('products.import.view') }}" class="dropdown-item">
-                        <x-icon.plus/>
+                        <x-icon.plus />
                         {{ __('Import Products') }}
                     </a>
                     <a href="{{ route('products.export.store') }}" class="dropdown-item">
-                        <x-icon.plus/>
+                        <x-icon.plus />
                         {{ __('Export Products') }}
                     </a>
                 </div>
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <x-spinner.loading-spinner/>
+    <x-spinner.loading-spinner />
 
     <div class="table-responsive">
         <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
@@ -94,13 +94,13 @@
                 </tr>
             </thead>
             <tbody>
-            @forelse ($products as $product)
+                @forelse ($products as $product)
                 <tr>
                     <td class="align-middle text-center">
                         {{ $loop->iteration }}
                     </td>
                     <td class="align-middle text-center">
-                        {{ $product->product_image }}
+                        <img style="max-height: 100px" class="img-account-profile mb-2" src="{{ $product->product_image ? asset('storage/products/'.$product->product_image) : asset('assets/img/products/default.webp') }}" alt="" id="image-preview">
                     </td>
                     <td class="align-middle text-center">
                         {{ $product->name }}
@@ -115,18 +115,18 @@
                         {{ $product->quantity }}
                     </td>
                     <td class="align-middle text-center" style="width: 10%">
-                        <x-button.show class="btn-icon" route="{{ route('products.show', $product) }}"/>
-                        <x-button.edit class="btn-icon" route="{{ route('products.edit', $product) }}"/>
-                        <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product) }}"/>
+                        <x-button.show class="btn-icon" route="{{ route('products.show', $product) }}" />
+                        <x-button.edit class="btn-icon" route="{{ route('products.edit', $product) }}" />
+                        <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product) }}" />
                     </td>
                 </tr>
-            @empty
+                @empty
                 <tr>
                     <td class="align-middle text-center" colspan="7">
                         No results found
                     </td>
                 </tr>
-            @endforelse
+                @endforelse
             </tbody>
         </table>
     </div>
