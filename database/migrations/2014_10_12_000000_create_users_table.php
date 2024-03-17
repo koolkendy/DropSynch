@@ -25,8 +25,6 @@ return new class extends Migration
             $table->string('bank_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->string('photo')->nullable();
         });
     }
 
