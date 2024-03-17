@@ -2,7 +2,7 @@
 
 @section('content')
 <aside class="col-md-3">
-                    
+
     <div class="card">
         <article class="filter-group">
             <header class="card-header">
@@ -12,18 +12,18 @@
                 </a>
             </header>
             <div class="filter-content collapse show" id="collapse_1" style="">
-                <div class="card-body">                    
+                <div class="card-body">
                     <ul class="list-menu">
                         @foreach($categories as $category)
-                            <li><a href="{{ url('reseller/dashboard', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+                        <li><a href="{{ url('reseller/dashboard', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
 
                 </div> <!-- card-body.// -->
             </div>
         </article> <!-- filter-group  .// -->
-    
-    
+
+
     </div> <!-- card.// -->
 
 </aside>
@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     @if (Session::has('message'))
-                        <p class="alert alert-success">{{ Session::get('message') }}</p>
+                    <p class="alert alert-success">{{ Session::get('message') }}</p>
                     @endif
                 </div>
             </div>
@@ -50,10 +50,10 @@
                         <div class="row no-gutters">
                             <aside class="col-sm-5 border-right">
                                 <article class="gallery-wrap">
-                                    
+
                                     <div class="img-big-wrap">
                                         <div>
-                                            <a href="#" data-fancybox=""><img src="https://picsum.photos/500/600?t={{$product->id}}"></a>
+                                            <a href="#" data-fancybox=""><img src="{{ $product->product_image ? asset('storage/products/'.$product->product_image) : asset('assets/img/products/default.webp') }}"></a>
                                         </div>
                                     </div>
 
@@ -63,15 +63,23 @@
                                 <article class="p-5">
                                     <h3 class="title mb-3">{{ $product->name }}</h3>
                                     <dl class="row">
-                                        <dt class="col-sm-3">Size</dt>
-                                        <dd class="col-sm-9">{{ $product->size }}</dd>
-                                        <dt class="col-sm-3">Color</dt>
+                                        <dt class="col-sm-3">Size: </dt>
+                                        <dd class="col-sm-9">
+                                            <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" readonly>
+                                                @foreach ($units as $unit)
+                                                <option value="{{ $unit->id }}" selected>
+                                                    {{ $unit->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </dd>
+                                        <dt class="col-sm-3">Color: </dt>
                                         <dd class="col-sm-9">{{ $product->color }}</dd>
                                     </dl>
                                     <div class="mb-3">
-                                            <var class="price h3 text-success">
-                                                <span class="currency">₱</span><span class="num" id="productPrice">{{ $product->selling_price }}</span>
-                                            </var>
+                                        <var class="price h3 text-success">
+                                            <span class="currency">₱</span><span class="num" id="productPrice">{{ $product->selling_price }}</span>
+                                        </var>
                                     </div>
                                     <hr>
                                     <form action="{{ route('reseller.resellerAddCartItem') }}" method="POST" role="form" id="addToCart">
@@ -104,7 +112,7 @@
                             <b>Description: </b>
 
                             {!! $product->notes !!}
-            
+
                             <br>
                             <br>
 
@@ -120,5 +128,5 @@
 @endsection
 
 @pushonce('page-scripts')
-    <script src="{{ asset('assets/js/img-preview.js') }}"></script>
+<script src="{{ asset('assets/js/img-preview.js') }}"></script>
 @endpushonce

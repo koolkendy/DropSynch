@@ -16,6 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::select('id', 'name')
+            ->where('user_id', auth()->user()->id)
             ->limit(1)
             ->get();
 

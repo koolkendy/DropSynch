@@ -42,6 +42,7 @@ class StoreProductRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
+            'user_id' => auth()->user()->id,
             'slug' => Str::slug($this->name, '-'),
             'code' => IdGenerator::generate([
                 'table' => 'products',

@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -22,12 +23,11 @@ class ResellerController extends Controller
     public function dashboard($slug = null)
     {
         $categoryTitle = '';
-        if($slug !== null){
+        if ($slug !== null) {
             $category = Category::where('slug', $slug)->firstOrFail();
             $categoryTitle = $category->name;
             $products = $category->products;
-        }
-        else{
+        } else {
             $products = Product::with(['category', 'unit'])->get();
         }
 
@@ -45,10 +45,12 @@ class ResellerController extends Controller
     public function product($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
-        
+        $units = Unit::all();
+
         return view('reseller.product', [
             'categories' => Category::all(),
-            'product' => $product
+            'product' => $product,
+            'units' => $units,
         ]);
     }
 
@@ -82,8 +84,6 @@ class ResellerController extends Controller
             $oDetails['unitcost'] = $content->price;
             $oDetails['total'] = $content->subtotal;
             $oDetails['created_at'] = Carbon::now();
-
-            
             OrderDetails::create($oDetails);
         }
 
@@ -100,7 +100,7 @@ class ResellerController extends Controller
         $order->loadMissing(['customer', 'details'])->get();
 
         return view('orders.show', [
-           'order' => $order
+            'order' => $order
         ]);
     }
 
@@ -111,9 +111,9 @@ class ResellerController extends Controller
         // Reduce the stock
         $ods = $order->details;
         foreach ($ods as $od) {
-           $product = Product::where('id', $od->product_id)->firstOrFail();
+            $product = Product::where('id', $od->product_id)->firstOrFail();
 
-           $product->updateInventory($od->quantity);
+            $product->updateInventory($od->quantity);
         }
 
         $order->update([

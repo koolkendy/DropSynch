@@ -16,16 +16,16 @@ class UserSeeder extends Seeder
         $users = collect([
             [
                 'id' => 100,
-                'name' => 'Admin',
-                'email' => 'admin@admin.com',
+                'name' => 'Admin Supplier 1',
+                'email' => 'supplier1@dropsynch.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'created_at' => now()
             ],
             [
                 'id' => 200,
-                'name' => 'Supplier 2',
-                'email' => 'supplier2@admin.com',
+                'name' => 'Admin Supplier 2',
+                'email' => 'supplier2@dropsynch.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'created_at' => now()
@@ -33,14 +33,14 @@ class UserSeeder extends Seeder
             [
                 'id' => 1001,
                 'name' => 'Dropshipper 1',
-                'email' => 'dropshipper1@example.com',
+                'email' => 'dropshipper1@dropsync.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'created_at' => now()
             ],
             [
                 'name' => 'Dropshipper 2',
-                'email' => 'dropshipper2@example.com',
+                'email' => 'dropshipper2@dropsync.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'created_at' => now()

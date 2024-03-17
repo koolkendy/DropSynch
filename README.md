@@ -43,7 +43,7 @@ DB_PASSWORD=
 11. Install `npm i laravel-datatables-vite`
 12. Install NPM dependencies `npm install && npm run dev`
 13. Run another CMD terminal and run `php artisan serve`
-14. Try login with email: `admin@admin.com` and password: `password`
+14. Try login with email: `supplier1@dropsynch.com` or `supplier2@dropsynch.com` and password: `password`
 
 ## 🚀 Config
 

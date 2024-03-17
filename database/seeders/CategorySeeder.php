@@ -16,32 +16,32 @@ class CategorySeeder extends Seeder
         $categories = collect([
             [
                 'id'    => 1,
-                'name'  => 'Laptops',
-                'slug'  => 'laptops'
+                'name'  => 'Shirts',
+                'slug'  => 'shirts'
             ],
             [
                 'id'    => 2,
-                'name'  => 'Hardware',
-                'slug'  => 'hardware'
+                'name'  => 'Dresses',
+                'slug'  => 'dresses'
             ],
             [
                 'id'    => 3,
-                'name'  => 'Smartphones',
-                'slug'  => 'smartphones'
+                'name'  => 'Pants',
+                'slug'  => 'pants'
             ],
             [
                 'id'    => 4,
-                'name'  => 'Speakers',
-                'slug'  => 'speakers'
+                'name'  => 'Shorts',
+                'slug'  => 'shorts'
             ],
             [
                 'id'    => 5,
-                'name'  => 'Software',
-                'slug'  => 'software'
+                'name'  => 'Jackets',
+                'slug'  => 'jackets'
             ]
         ]);
 
-        $categories->each(function ($category){
+        $categories->each(function ($category) {
             Category::insert($category);
         });
     }

@@ -14,8 +14,8 @@ class ProductSeeder extends Seeder
         $products = collect([
             [
                 'user_id' => 100,
-                'name' => 'iPhone 14 Pro',
-                'slug' => 'iphone-14-pro',
+                'name' => 'Light Pants',
+                'slug' => 'light-pants',
                 'code' => "001",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -26,11 +26,12 @@ class ProductSeeder extends Seeder
                 'notes' => null,
                 'category_id' => 3,
                 'unit_id' => 3,
+                'product_image' => 'light-pants.jpg'
             ],
             [
                 'user_id' => 100,
-                'name' => 'ASUS Laptop',
-                'slug' => 'asus-laptop',
+                'name' => 'Ragged Jeans',
+                'slug' => 'ragged-jeans',
                 'code' => "002",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -39,13 +40,14 @@ class ProductSeeder extends Seeder
                 'tax' => 12,
                 'tax_type' => 0,
                 'notes' => null,
-                'category_id' => 1,
+                'category_id' => 3,
                 'unit_id' => 3,
+                'product_image' => 'ragged-jeans.jpg'
             ],
             [
                 'user_id' => 100,
-                'name' => 'Logitech Keyboard',
-                'slug' => 'logitech-keyboard',
+                'name' => 'Pretty Garden',
+                'slug' => 'pretty-garden',
                 'code' => "003",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -56,11 +58,12 @@ class ProductSeeder extends Seeder
                 'notes' => null,
                 'category_id' => 2,
                 'unit_id' => 3,
+                'product_image' => 'pretty-garden.jpg'
             ],
             [
                 'user_id' => 100,
-                'name' => 'Logitech Speakers',
-                'slug' => 'logitech-speakers',
+                'name' => 'Drawstring Shorts',
+                'slug' => 'drawstring-shorts',
                 'code' => "004",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -71,11 +74,12 @@ class ProductSeeder extends Seeder
                 'notes' => null,
                 'category_id' => 4,
                 'unit_id' => 3,
+                'product_image' => 'drawstring-shorts.jpg'
             ],
             [
                 'user_id' => 100,
-                'name' => 'AutoCAD v7.0',
-                'slug' => 'autocad-v7.0',
+                'name' => 'Denim Jacket',
+                'slug' => 'denim-jacket',
                 'code' => "005",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -86,6 +90,7 @@ class ProductSeeder extends Seeder
                 'notes' => null,
                 'category_id' => 5,
                 'unit_id' => 3,
+                'product_image' => 'denim-jacket.jpg'
             ]
         ]);
 
@@ -96,8 +101,8 @@ class ProductSeeder extends Seeder
         $products = collect([
             [
                 'user_id' => 200,
-                'name' => 'AutoCAD v3.0',
-                'slug' => 'autocad-v3.0',
+                'name' => 'Longsleeves Cotton Shirt',
+                'slug' => 'longsleeve-cotton',
                 'code' => "006",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -106,13 +111,14 @@ class ProductSeeder extends Seeder
                 'tax' => 12,
                 'tax_type' => 0,
                 'notes' => null,
-                'category_id' => 5,
+                'category_id' => 1,
                 'unit_id' => 3,
+                'product_image' => 'blue-longsleeve.jpg'
             ],
             [
                 'user_id' => 200,
-                'name' => 'AutoCAD v4.0',
-                'slug' => 'autocad-v4.0',
+                'name' => 'Lapel Shirt',
+                'slug' => 'lapel-shirt',
                 'code' => "007",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -121,13 +127,14 @@ class ProductSeeder extends Seeder
                 'tax' => 12,
                 'tax_type' => 0,
                 'notes' => null,
-                'category_id' => 5,
+                'category_id' => 1,
                 'unit_id' => 3,
+                'product_image' => 'lapel-shirt.jpg'
             ],
             [
                 'user_id' => 200,
-                'name' => 'AutoCAD v5.0',
-                'slug' => 'autocad-v5.0',
+                'name' => 'Emoji Jacket',
+                'slug' => 'emoji-jacket',
                 'code' => "008",
                 'quantity' => 10,
                 'buying_price' => 900,
@@ -138,6 +145,7 @@ class ProductSeeder extends Seeder
                 'notes' => null,
                 'category_id' => 5,
                 'unit_id' => 3,
+                'product_image' => 'emoji-jacket.jpg'
             ]
         ]);
 

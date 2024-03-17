@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Dropshipping System'),
+    'name' => env('APP_NAME', 'Dropsynch | Dropshipping System'),
 
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +172,7 @@ return [
         /*
         * Third Party Service Providers...
         */
-        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class, Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
     ])->toArray(),
 
     /*

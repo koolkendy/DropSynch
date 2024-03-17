@@ -15,23 +15,33 @@ class UnitSeeder extends Seeder
     {
         $units = collect([
             [
-                'name' => 'Meters',
-                'slug' => 'meters',
-                'short_code' => 'm'
+                'name' => 'Extra Small',
+                'slug' => 'extra-small',
+                'short_code' => 'XS'
             ],
             [
-                'name' => 'Centimeters',
-                'slug' => 'centimeters',
-                'short_code' => 'cm'
+                'name' => 'Small',
+                'slug' => 'small',
+                'short_code' => 'S'
             ],
             [
-                'name' => 'Piece',
-                'slug' => 'piece',
-                'short_code' => 'pc'
+                'name' => 'Medium',
+                'slug' => 'medium',
+                'short_code' => 'M'
+            ],
+            [
+                'name' => 'Large',
+                'slug' => 'large',
+                'short_code' => 'L'
+            ],
+            [
+                'name' => 'Extra Large',
+                'slug' => 'extra-large',
+                'short_code' => 'XL'
             ]
         ]);
 
-        $units->each(function ($unit){
+        $units->each(function ($unit) {
             Unit::insert($unit);
         });
     }
