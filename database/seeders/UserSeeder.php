@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
                 'name' => 'Admin Supplier 1',
                 'email' => 'supplier1@dropsynch.com',
                 'email_verified_at' => now(),
+                'phone' => '+63 970 000 0001',
                 'password' => bcrypt('password'),
                 'created_at' => now()
             ],
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
                 'name' => 'Admin Supplier 2',
                 'email' => 'supplier2@dropsynch.com',
                 'email_verified_at' => now(),
+                'phone' => '+63 970 000 0002',
                 'password' => bcrypt('password'),
                 'created_at' => now()
             ],

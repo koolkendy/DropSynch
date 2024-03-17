@@ -28,11 +28,12 @@ class InvoiceController extends Controller
         //for now we use ID:1, we need to change customer_id to be related to the user_id
 
         $carts = Cart::content();
-
+        $total = Cart::total();
         return view('reseller.create-invoice', [
             'customer' => $customer,
             'carts' => $carts,
             'request' => $request,
+            'total' => $total,
         ]);
     }
 }

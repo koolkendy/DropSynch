@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\Unit;
+use App\Models\Color;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -46,11 +47,13 @@ class ResellerController extends Controller
     {
         $product = Product::where('slug', $slug)->firstOrFail();
         $units = Unit::all();
+        $colors = Color::all();
 
         return view('reseller.product', [
             'categories' => Category::all(),
             'product' => $product,
             'units' => $units,
+            'colors' => $colors,
         ]);
     }
 

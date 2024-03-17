@@ -65,7 +65,7 @@
                                     <dl class="row">
                                         <dt class="col-sm-3">Size: </dt>
                                         <dd class="col-sm-9">
-                                            <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" readonly>
+                                            <select name="unit_id" id="unit_id" class="form-select @error('unit_id') is-invalid @enderror" readonly>
                                                 @foreach ($units as $unit)
                                                 <option value="{{ $unit->id }}" selected>
                                                     {{ $unit->name }}
@@ -74,7 +74,15 @@
                                             </select>
                                         </dd>
                                         <dt class="col-sm-3">Color: </dt>
-                                        <dd class="col-sm-9">{{ $product->color }}</dd>
+                                        <dd class="col-sm-9">
+                                            <select name="color_id" id="color_id" class="form-select @error('color_id') is-invalid @enderror" readonly>
+                                                @foreach ($colors as $color)
+                                                <option value="{{ $color->id }}" selected>
+                                                    {{ $color->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </dd>
                                     </dl>
                                     <div class="mb-3">
                                         <var class="price h3 text-success">

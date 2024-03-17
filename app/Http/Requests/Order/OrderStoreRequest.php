@@ -21,6 +21,8 @@ class OrderStoreRequest extends FormRequest
         return [
             'customer_id' => 'required',
             'payment_type' => 'required',
+            'reference_number' => 'required',
+            'account_number' => 'required',
             'pay' => 'required|numeric'
         ];
     }
@@ -46,7 +48,7 @@ class OrderStoreRequest extends FormRequest
                 'prefix' => 'INV-'
             ]),
             //'due' => ((int)Cart::total()) - ((int)$this->pay)
-            'due' => (int)($total - $pay )
+            'due' => (int)($total - $pay)
         ]);
     }
 }

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('total');
             $table->string('invoice_no');
             $table->string('payment_type');
+            $table->string('reference_number');
+            $table->string('account_number');
             $table->integer('pay');
             $table->integer('due');
             $table->timestamps();
