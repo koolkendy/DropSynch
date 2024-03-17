@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        
+
         return redirect()->intended($this->redirectTo());
     }
 
@@ -49,6 +49,9 @@ class AuthenticatedSessionController extends Controller
 
     public function redirectTo()
     {
+        if (!Auth::user())
+            return '/login';
+
         if (Auth::user()->email === 'admin@admin.com') {
             return RouteServiceProvider::HOME;
         } else {
