@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         $users = collect([
             [
+                'id' => 100,
                 'name' => 'Admin',
                 'email' => 'admin@admin.com',
                 'email_verified_at' => now(),
@@ -22,6 +23,15 @@ class UserSeeder extends Seeder
                 'created_at' => now()
             ],
             [
+                'id' => 200,
+                'name' => 'Supplier 2',
+                'email' => 'supplier2@admin.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'created_at' => now()
+            ],
+            [
+                'id' => 1001,
                 'name' => 'Dropshipper 1',
                 'email' => 'dropshipper1@example.com',
                 'email_verified_at' => now(),
@@ -37,7 +47,7 @@ class UserSeeder extends Seeder
             ]
         ]);
 
-        $users->each(function ($user){
+        $users->each(function ($user) {
             User::insert($user);
         });
     }
