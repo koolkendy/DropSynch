@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $orders = Order::count();
+        $pendingOrders = Order::where('order_status', 0)->count();
         $products = Product::where("user_id", auth()->user()->id)->count();
 
         $purchases = Purchase::count();
@@ -29,6 +30,7 @@ class DashboardController extends Controller
         return view('dashboard', [
             'products' => $products,
             'orders' => $orders,
+            'pendingOrders' => $pendingOrders,
             'purchases' => $purchases,
             'todayPurchases' => $todayPurchases,
             'categories' => $categories,
