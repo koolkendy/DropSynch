@@ -20,10 +20,8 @@ class OrderTable extends Component
 
     public function sortBy($field): void
     {
-        if($this->sortField === $field)
-        {
-            $this->sortAsc = ! $this->sortAsc;
-
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
@@ -35,7 +33,7 @@ class OrderTable extends Component
     {
         return view('livewire.tables.order-table', [
             'orders' => Order::query()
-                ->with(['customer', 'details'])
+                ->with(['user', 'details'])
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage)

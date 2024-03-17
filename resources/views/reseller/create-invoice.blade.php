@@ -52,7 +52,7 @@
                                     <p class="inv-from-1">{{ $request->phone }}</p>
 
                                     <p class="inv-from-2">{{ $request->address }}</p>
-                                    <p class="inv-from-1">{{ $customer->zip }}</p>
+                                    <p class="inv-from-1">{{ $user->zip }}</p>
                                     <p class="inv-from-2">{{ $request->city }}</p>
                                 </div>
                                 <div class="col-sm-6 text-end mb-50">
@@ -145,7 +145,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <input type="hidden" name="customer_id" value="{{ $customer->id }}">
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
 
                                     <x-input.index label="Customer" name="customer" value="{{ $request->name }}" disabled />
                                 </div>

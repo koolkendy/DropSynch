@@ -13,11 +13,11 @@
                             </h3>
                         </div>
                         <div class="card-actions btn-actions">
-                            <x-action.close route="{{ route('orders.index') }}"/>
+                            <x-action.close route="{{ route('orders.index') }}" />
                         </div>
                     </div>
                     <form action="{{ route('invoice.create') }}" method="POST">
-                    @csrf
+                        @csrf
                         <div class="card-body">
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-4">
@@ -26,11 +26,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
 
-                                    <input name="purchase_date" id="purchase_date" type="date"
-                                           class="form-control example-date-input @error('purchase_date') is-invalid @enderror"
-                                           value="{{ old('purchase_date') ?? now()->format('Y-m-d') }}"
-                                           required
-                                    >
+                                    <input name="purchase_date" id="purchase_date" type="date" class="form-control example-date-input @error('purchase_date') is-invalid @enderror" value="{{ old('purchase_date') ?? now()->format('Y-m-d') }}" required>
 
                                     @error('purchase_date')
                                     <div class="invalid-feedback">
@@ -40,24 +36,24 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="small mb-1" for="customer_id">
-                                        {{ __('Customer') }}
+                                    <label class="small mb-1" for="user_id">
+                                        {{ __('user') }}
                                         <span class="text-danger">*</span>
                                     </label>
 
-                                    <select class="form-select form-control-solid @error('customer_id') is-invalid @enderror" id="customer_id" name="customer_id">
+                                    <select class="form-select form-control-solid @error('user_id') is-invalid @enderror" id="user_id" name="user_id">
                                         <option selected="" disabled="">
                                             Select a customer:
                                         </option>
 
-                                        @foreach ($customers as $customer)
-                                            <option value="{{ $customer->id }}" @selected( old('customer_id') == $customer->id)>
-                                                {{ $customer->name }}
-                                            </option>
+                                        @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" @selected( old('user_id')==$user->id)>
+                                            {{ $user->name }}
+                                        </option>
                                         @endforeach
                                     </select>
 
-                                    @error('customer_id')
+                                    @error('user_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -69,12 +65,7 @@
                                         {{ __('Reference') }}
                                     </label>
 
-                                    <input type="text" class="form-control"
-                                           id="reference"
-                                           name="reference"
-                                           value="ORD"
-                                           readonly
-                                    >
+                                    <input type="text" class="form-control" id="reference" name="reference" value="ORD" readonly>
 
                                     @error('reference')
                                     <div class="invalid-feedback">
@@ -106,148 +97,155 @@
                                                 {{ $item->name }}
                                             </td>
                                             <td style="min-width: 170px;">
-                                                    <div class="input-group">
-                                                        <input type="number" class="form-control" name="qty[{{$loop->index}}]" required value="{{ old('qty['.$loop->index.']', $item->qty) }}">
-                                                    </div>
-                                                </form>
-                                            </td>
-                                            <td class="text-center">
-                                                {{ $item->price }}
-                                            </td>
-                                            <td class="text-center">
-                                                {{ $item->subtotal }}
-                                            </td>
-                                            <td class="text-center">
-                                                    <button type="submit" class="btn btn-icon btn-outline-danger " onclick="return confirm('Are you sure you want to delete this record? (not working)')">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                    </button>
-                                     
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <td colspan="5" class="text-center">
-                                            {{ __('Add Products') }}
-                                        </td>
-                                        @endforelse
-
-                                        <tr>
-                                            <td colspan="4" class="text-end">
-                                                Total Product
-                                            </td>
-                                            <td class="text-center">
-                                                {{ Cart::count() }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" class="text-end">Subtotal</td>
-                                            <td class="text-center">
-                                                {{ Cart::subtotal() }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" class="text-end">Tax</td>
-                                            <td class="text-center">
-                                                {{ Cart::tax() }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" class="text-end">Tax</td>
-                                            <td class="text-center">
-                                                {{ Cart::total() }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-success add-list mx-1">
-                                {{ __('Create Invoice') }}
-                            </button>
-                        </div>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" name="qty[{{$loop->index}}]" required value="{{ old('qty['.$loop->index.']', $item->qty) }}">
+                                                </div>
                     </form>
+                    </td>
+                    <td class="text-center">
+                        {{ $item->price }}
+                    </td>
+                    <td class="text-center">
+                        {{ $item->subtotal }}
+                    </td>
+                    <td class="text-center">
+                        <button type="submit" class="btn btn-icon btn-outline-danger " onclick="return confirm('Are you sure you want to delete this record? (not working)')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 7l16 0" />
+                                <path d="M10 11l0 6" />
+                                <path d="M14 11l0 6" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </button>
+
+                    </td>
+                    </tr>
+                    @empty
+                    <td colspan="5" class="text-center">
+                        {{ __('Add Products') }}
+                    </td>
+                    @endforelse
+
+                    <tr>
+                        <td colspan="4" class="text-end">
+                            Total Product
+                        </td>
+                        <td class="text-center">
+                            {{ Cart::count() }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end">Subtotal</td>
+                        <td class="text-center">
+                            {{ Cart::subtotal() }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end">Tax</td>
+                        <td class="text-center">
+                            {{ Cart::tax() }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end">Tax</td>
+                        <td class="text-center">
+                            {{ Cart::total() }}
+                        </td>
+                    </tr>
+                    </tbody>
+                    </table>
                 </div>
+
             </div>
+            <div class="card-footer text-end">
+                <button type="submit" class="btn btn-success add-list mx-1">
+                    {{ __('Create Invoice') }}
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
 
 
-            <div class="col-lg-5">
-                <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">
-                        List Product
-                    </div>
-                    <div class="card-body">
-                        <div class="col-lg-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered align-middle">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            {{--- <th scope="col">No.</th> ---}}
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Unit</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($products as $product)
-                                        <tr>
-                                            {{---
+    <div class="col-lg-5">
+        <div class="card mb-4 mb-xl-0">
+            <div class="card-header">
+                List Product
+            </div>
+            <div class="card-body">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered align-middle">
+                            <thead class="thead-light">
+                                <tr>
+                                    {{--- <th scope="col">No.</th> ---}}
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Unit</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($products as $product)
+                                <tr>
+                                    {{---
                                             <td>
                                                 <div style="max-height: 80px; max-width: 80px;">
                                                     <img class="img-fluid"  src="{{ $product->product_image ? asset('storage/products/'.$product->product_image) : asset('assets/img/products/default.webp') }}">
-                                                </div>
-                                            </td>
-                                            ---}}
-                                            <td class="text-center">
-                                                {{ $product->name }}
-                                            </td>
-                                            <td class="text-center">
-                                                {{ $product->quantity }}
-                                            </td>
-                                            <td class="text-center">
-                                                {{ $product->unit->name }}
-                                            </td>
-                                            <td class="text-center">
-                                                {{ number_format($product->selling_price, 2) }}
-                                            </td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $product->id }}">
-                                                        <input type="hidden" name="name" value="{{ $product->name }}">
-                                                        <input type="hidden" name="selling_price" value="{{ $product->selling_price }}">
-
-                                                        <button type="submit" class="btn btn-icon btn-outline-primary">
-                                                            <x-icon.cart/>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <th colspan="6" class="text-center" >
-                                                Data not found!
-                                            </th>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                     </div>
+                    </td>
+                    ---}}
+                    <td class="text-center">
+                        {{ $product->name }}
+                    </td>
+                    <td class="text-center">
+                        {{ $product->quantity }}
+                    </td>
+                    <td class="text-center">
+                        {{ $product->unit->name }}
+                    </td>
+                    <td class="text-center">
+                        {{ number_format($product->selling_price, 2) }}
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                <input type="hidden" name="selling_price" value="{{ $product->selling_price }}">
+
+                                <button type="submit" class="btn btn-icon btn-outline-primary">
+                                    <x-icon.cart />
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <th colspan="6" class="text-center">
+                            Data not found!
+                        </th>
+                    </tr>
+                    @endforelse
+                    </tbody>
+                    </table>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+</div>
+</div>
+</div>
 @endsection
 
 @pushonce('page-scripts')
-    <script src="{{ asset('assets/js/img-preview.js') }}"></script>
+<script src="{{ asset('assets/js/img-preview.js') }}"></script>
 @endpushonce

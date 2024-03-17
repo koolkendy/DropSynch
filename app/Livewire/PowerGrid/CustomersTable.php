@@ -2,7 +2,7 @@
 
 namespace App\Livewire\PowerGrid;
 
-use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -40,7 +40,7 @@ final class CustomersTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return Customer::query();
+        return User::query();
     }
 
     public function relationSearch(): array
@@ -54,7 +54,7 @@ final class CustomersTable extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('name')
 
-           /** Example of custom column using a closure **/
+            /** Example of custom column using a closure **/
             ->addColumn('name_lower', fn (Customer $model) => strtolower(e($model->name)))
 
             ->addColumn('email')
@@ -91,9 +91,7 @@ final class CustomersTable extends PowerGridComponent
 
     public function filters(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
     public function actions(\App\Models\Customer $row): array
@@ -102,12 +100,12 @@ final class CustomersTable extends PowerGridComponent
             Button::make('show', file_get_contents('assets/svg/eye.svg'))
                 ->class('btn btn-outline-info btn-icon w-100')
                 ->tooltip('Show Customer Details')
-                ->route('customers.show', ['customer' => $row])
+                ->route('customers.show', ['user' => $row])
                 ->method('get'),
 
             Button::make('edit', file_get_contents('assets/svg/edit.svg'))
                 ->class('btn btn-outline-warning btn-icon w-100')
-                ->route('customers.edit', ['customer' => $row])
+                ->route('customers.edit', ['user' => $row])
                 ->method('get')
                 ->tooltip('Edit Customer'),
 
@@ -115,7 +113,7 @@ final class CustomersTable extends PowerGridComponent
                 ->slot(file_get_contents('assets/svg/trash.svg'))
                 ->class('btn btn-outline-danger btn-icon w-100')
                 ->tooltip('Delete Customer')
-                ->route('customers.destroy', ['customer' => $row])
+                ->route('customers.destroy', ['user' => $row])
                 ->method('delete'),
         ];
     }

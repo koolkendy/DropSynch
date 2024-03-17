@@ -16,7 +16,7 @@ class QuotationController extends Controller
 {
     public function index()
     {
-        $quotations = Quotation::with(['customer'])->get();
+        $quotations = Quotation::with(['user'])->get();
 
         return view('quotations.index', [
             'quotations' => $quotations
@@ -30,7 +30,7 @@ class QuotationController extends Controller
         return view('quotations.create', [
             'cart' => Cart::content('quotation'),
             'products' => Product::all(),
-            'customers' => User::all(),
+            'users' => User::all(),
 
             // maybe?
             //'statuses' => QuotationStatus::cases()
@@ -43,8 +43,8 @@ class QuotationController extends Controller
             $quotation = Quotation::create([
                 'date' => $request->date,
                 'reference' => $request->reference,
-                'user_id' => $request->customer_id,
-                'customer_name' => User::findOrFail($request->customer_id)->name,
+                'user_id' => $request->user_id,
+                'customer_name' => User::findOrFail($request->user_id)->name,
                 'tax_percentage' => $request->tax_percentage,
                 'discount_percentage' => $request->discount_percentage,
                 'shipping_amount' => $request->shipping_amount, //* 100,

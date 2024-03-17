@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -13,18 +13,18 @@ class PosController extends Controller
     {
         $products = Product::with(['category', 'unit'])->get();
 
-        $customers = Customer::all()->sortBy('name');
+        $users = User::all()->sortBy('name');
 
         $carts = Cart::content();
 
         return view('pos.index', [
             'products' => $products,
-            'customers' => $customers,
+            'users' => $users,
             'carts' => $carts,
         ]);
     }
 
-    public function addCartItem (Request $request)
+    public function addCartItem(Request $request)
     {
         $request->all();
         //dd($request);
@@ -37,28 +37,30 @@ class PosController extends Controller
 
         $validatedData = $request->validate($rules);
 
-//        Cart::add([
-//            'id'        => $validatedData['id'],
-//            'name'      => $validatedData['name'],
-//            'qty'       => 1,
-//            'price'     => $validatedData['selling_price'],
-//            'weight'    => 1,
-//            //'options' => []
-//        ]);
+        //        Cart::add([
+        //            'id'        => $validatedData['id'],
+        //            'name'      => $validatedData['name'],
+        //            'qty'       => 1,
+        //            'price'     => $validatedData['selling_price'],
+        //            'weight'    => 1,
+        //            //'options' => []
+        //        ]);
 
-        Cart::add($validatedData['id'],
+        Cart::add(
+            $validatedData['id'],
             $validatedData['name'],
             1,
             $validatedData['selling_price'],
             1,
-            (array)$options = null);
+            (array)$options = null
+        );
 
         return redirect()
             ->back()
             ->with('success', 'Product has been added to cart!');
     }
 
-    public function resellerAddCartItem (Request $request)
+    public function resellerAddCartItem(Request $request)
     {
         $request->all();
         //dd($request);
@@ -72,12 +74,14 @@ class PosController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        Cart::add($validatedData['id'],
+        Cart::add(
+            $validatedData['id'],
             $validatedData['name'],
             $validatedData['qty'],
             $validatedData['selling_price'],
             1,
-            (array)$options = null);
+            (array)$options = null
+        );
 
         return redirect()->route('reseller.showCart');
     }

@@ -13,7 +13,7 @@ class Quotation extends Model
     protected $fillable = [
         'date',
         'reference',
-        'customer_id',
+        'user_id',
         'customer_name',
         'tax_percentage',
         'tax_amount',

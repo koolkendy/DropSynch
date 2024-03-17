@@ -32,13 +32,13 @@ class OrderController extends Controller
     {
         $products = Product::with(['category', 'unit'])->get();
 
-        $customers = User::all(['id', 'name']);
+        $users = User::all(['id', 'name']);
 
         $carts = Cart::content();
 
         return view('orders.create', [
             'products' => $products,
-            'customers' => $customers,
+            'users' => $users,
             'carts' => $carts,
         ]);
     }
@@ -74,7 +74,7 @@ class OrderController extends Controller
     public function resellerStore(ResellerOrderStoreRequest $request)
     {
 
-        $data = ['customer_id' => '1'];
+        $data = ['user_id' => auth()->user()->id];
         $request = $request->merge($data);
 
         $order = Order::create($request->all());
@@ -105,7 +105,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->loadMissing(['customer', 'details'])->get();
+        $order->loadMissing(['user', 'details'])->get();
 
         return view('orders.show', [
             'order' => $order
@@ -143,8 +143,8 @@ class OrderController extends Controller
         // TODO: Need refactor
         //dd($order);
 
-        //$order = Order::with('customer')->where('id', $order_id)->first();
-        $order = Order::with(['customer', 'details'])
+        //$order = Order::with('user')->where('id', $order_id)->first();
+        $order = Order::with(['user', 'details'])
             ->where('id', $order)
             ->first();
 

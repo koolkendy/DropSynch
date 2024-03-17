@@ -10,10 +10,10 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = User::all();
+        $users = User::all();
 
         return view('customers.index', [
-            'customers' => $customers
+            'users' => $users
         ]);
     }
 
@@ -24,7 +24,7 @@ class CustomerController extends Controller
 
     public function store(StoreCustomerRequest $request)
     {
-        $customer = User::create($request->all());
+        $user = User::create($request->all());
 
         /**
          * Handle upload an image
@@ -34,7 +34,7 @@ class CustomerController extends Controller
             $filename = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
             $file->storeAs('customers/', $filename, 'public');
-            $customer->update([
+            $user->update([
                 'photo' => $filename
             ]);
         }
@@ -44,32 +44,32 @@ class CustomerController extends Controller
             ->with('success', 'New customer has been created!');
     }
 
-    public function show(User $customer)
+    public function show(User $user)
     {
-        $customer->loadMissing(['quotations', 'orders'])->get();
+        $user->loadMissing(['quotations', 'orders'])->get();
 
         return view('customers.show', [
-            'customer' => $customer
+            'user' => $user
         ]);
     }
 
-    public function edit(User $customer)
+    public function edit(User $user)
     {
         return view('customers.edit', [
-            'customer' => $customer
+            'user' => $user
         ]);
     }
 
-    public function update(UpdateCustomerRequest $request, User $customer)
+    public function update(UpdateCustomerRequest $request, User $user)
     {
         //
-        $customer->update($request->except('photo'));
+        $user->update($request->except('photo'));
 
         if ($request->hasFile('photo')) {
 
             // Delete Old Photo
-            if ($customer->photo) {
-                unlink(public_path('storage/customers/') . $customer->photo);
+            if ($user->photo) {
+                unlink(public_path('storage/customers/') . $user->photo);
             }
 
             // Prepare New Photo
@@ -80,7 +80,7 @@ class CustomerController extends Controller
             $file->storeAs('customers/', $fileName, 'public');
 
             // Save DB
-            $customer->update([
+            $user->update([
                 'photo' => $fileName
             ]);
         }
@@ -90,13 +90,13 @@ class CustomerController extends Controller
             ->with('success', 'Customer has been updated!');
     }
 
-    public function destroy(User $customer)
+    public function destroy(User $user)
     {
-        if ($customer->photo) {
-            unlink(public_path('storage/customers/') . $customer->photo);
+        if ($user->photo) {
+            unlink(public_path('storage/customers/') . $user->photo);
         }
 
-        $customer->delete();
+        $user->delete();
 
         return redirect()
             ->back()

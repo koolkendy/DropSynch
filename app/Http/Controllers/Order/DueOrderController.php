@@ -22,7 +22,7 @@ class DueOrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->loadMissing(['customer', 'details'])->get();
+        $order->loadMissing(['user', 'details'])->get();
 
         return view('due.show', [
             'order' => $order
@@ -31,13 +31,13 @@ class DueOrderController extends Controller
 
     public function edit(Order $order)
     {
-        $order->loadMissing(['customer', 'details'])->get();
+        $order->loadMissing(['user', 'details'])->get();
 
-        $customers = User::select(['id', 'name'])->get();
+        $users = User::select(['id', 'name'])->get();
 
         return view('due.edit', [
             'order' => $order,
-            'customers' => $customers
+            'users' => $users
         ]);
     }
 

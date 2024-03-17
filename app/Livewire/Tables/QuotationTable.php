@@ -20,10 +20,8 @@ class QuotationTable extends Component
 
     public function sortBy($field): void
     {
-        if($this->sortField === $field)
-        {
-            $this->sortAsc = ! $this->sortAsc;
-
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
@@ -35,7 +33,7 @@ class QuotationTable extends Component
     {
         return view('livewire.tables.quotation-table', [
             'quotations' => Quotation::query()
-                ->with(['quotationDetails', 'customer'])
+                ->with(['quotationDetails', 'user'])
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate()

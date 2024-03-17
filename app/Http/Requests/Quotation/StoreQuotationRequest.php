@@ -22,7 +22,7 @@ class StoreQuotationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
             'reference' => 'required|string|max:255',
             'tax_percentage' => 'required|integer|min:0|max:100',
             'discount_percentage' => 'required|integer|min:0|max:100',

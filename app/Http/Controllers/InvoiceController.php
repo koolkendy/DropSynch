@@ -9,28 +9,27 @@ use App\Http\Requests\Invoice\ResellerInvoiceRequest;
 
 class InvoiceController extends Controller
 {
-    public function create(StoreInvoiceRequest $request, User $customer)
+    public function create(StoreInvoiceRequest $request, User $user)
     {
-        $customer = User::where('id', $request->get('customer_id'))
+        $user = User::where('id', $request->get('user_id'))
             ->first();
 
         $carts = Cart::content();
 
         return view('pos.create', [
-            'customer' => $customer,
+            'user' => $user,
             'carts' => $carts
         ]);
     }
 
-    public function resellerCreate(ResellerInvoiceRequest $request, User $customer)
+    public function resellerCreate(ResellerInvoiceRequest $request, User $user)
     {
-        $customer = auth()->user();
-        //for now we use ID:1, we need to change customer_id to be related to the user_id
+        $user = auth()->user();
 
         $carts = Cart::content();
         $total = Cart::total();
         return view('reseller.create-invoice', [
-            'customer' => $customer,
+            'user' => $user,
             'carts' => $carts,
             'request' => $request,
             'total' => $total,

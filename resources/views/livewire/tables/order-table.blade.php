@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <x-spinner.loading-spinner/>
+    <x-spinner.loading-spinner />
 
     <div class="table-responsive">
         <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
@@ -50,9 +50,9 @@
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
-                            {{ __('Customer') }}
-                            @include('inclues._sort-icon', ['field' => 'customer_id'])
+                        <a wire:click.prevent="sortBy('user_id')" href="#" role="button">
+                            {{ __('user') }}
+                            @include('inclues._sort-icon', ['field' => 'user_id'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody>
-            @forelse ($orders as $order)
+                @forelse ($orders as $order)
                 <tr>
                     <td class="align-middle text-center">
                         {{ $loop->iteration }}
@@ -106,24 +106,22 @@
                         {{ Number::currency($order->total, 'PHP') }}
                     </td>
                     <td class="align-middle text-center">
-                        <x-status dot color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : 'orange' }}"
-                                  class="text-uppercase"
-                        >
+                        <x-status dot color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : 'orange' }}" class="text-uppercase">
                             {{ $order->order_status->label() }}
                         </x-status>
                     </td>
                     <td class="align-middle text-center">
-                        <x-button.show class="btn-icon" route="{{ route('orders.show', $order) }}"/>
-                        <x-button.print class="btn-icon" route="{{ route('order.downloadInvoice', $order) }}"/>
+                        <x-button.show class="btn-icon" route="{{ route('orders.show', $order) }}" />
+                        <x-button.print class="btn-icon" route="{{ route('order.downloadInvoice', $order) }}" />
                     </td>
                 </tr>
-            @empty
+                @empty
                 <tr>
                     <td class="align-middle text-center" colspan="8">
                         No results found
                     </td>
                 </tr>
-            @endforelse
+                @endforelse
             </tbody>
         </table>
     </div>

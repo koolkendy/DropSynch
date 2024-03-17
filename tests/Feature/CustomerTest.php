@@ -24,8 +24,8 @@ class CustomerTest extends TestCase
 
         // Create Unit
         $this->createCustomer();
-        $this->assertDatabaseCount('customers', 1)
-            ->assertDatabaseHas('customers', ['name' => 'Customer 1']);
+        $this->assertDatabaseCount('users', 1)
+            ->assertDatabaseHas('users', ['name' => 'Customer 1']);
 
         $user = $this->createUser();
         $response = $this->actingAs($user)
@@ -47,26 +47,25 @@ class CustomerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $customer = $this->createCustomer();
+        $user = $this->createCustomer();
 
-        $this->assertDatabaseHas('customers', ['name' => 'Customer 1']);
-        $this->assertDatabaseCount('customers', 1);
+        $this->assertDatabaseHas('users', ['name' => 'Customer 1']);
+        $this->assertDatabaseCount('users', 1);
 
         $user = $this->createUser();
         $this->actingAs($user);
 
-        $this->delete('/customers/'. $customer->id);
+        $this->delete('/customers/' . $user->id);
 
-        $this->assertDatabaseCount('customers', 0);
-
+        $this->assertDatabaseCount('users', 0);
     }
 
     public function test_user_can_see_show_view()
     {
         $user = $this->createUser();
-        $customer = $this->createCustomer();
+        $user = $this->createCustomer();
 
-        $response = $this->actingAs($user)->get('customers/'.$customer->id);
+        $response = $this->actingAs($user)->get('customers/' . $user->id);
 
         $response
             ->assertStatus(200)
@@ -76,9 +75,9 @@ class CustomerTest extends TestCase
     public function test_user_can_see_edit_view()
     {
         $user = $this->createUser();
-        $customer = $this->createCustomer();
+        $user = $this->createCustomer();
 
-        $response = $this->actingAs($user)->get('customers/'.$customer->id.'/edit');
+        $response = $this->actingAs($user)->get('customers/' . $user->id . '/edit');
 
         $response
             ->assertStatus(200)

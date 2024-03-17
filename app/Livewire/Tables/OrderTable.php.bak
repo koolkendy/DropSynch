@@ -23,7 +23,7 @@ class OrderTable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable(),
 
-            Column::make("Customer id", "customer_id")
+            Column::make("Customer id", "user_id")
                 ->sortable(),
 
             Column::make("Order date", "order_date")

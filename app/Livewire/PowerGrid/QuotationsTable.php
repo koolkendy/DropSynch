@@ -32,9 +32,9 @@ final class QuotationsTable extends PowerGridComponent
         //$this->showCheckBox();
 
         return [
-//            Exportable::make('export')
-//                ->striped()
-//                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            //            Exportable::make('export')
+            //                ->striped()
+            //                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
 
             Header::make()->showSearchInput(),
             Footer::make()
@@ -61,7 +61,7 @@ final class QuotationsTable extends PowerGridComponent
             ->addColumn('reference')
             ->addColumn('date_formatted', fn (Quotation $model) => Carbon::parse($model->date)->format('d/m/Y'))
 
-            ->addColumn('customer_id')
+            ->addColumn('user_id')
             ->addColumn('customer_name')
 
             ->addColumn('total_amount')

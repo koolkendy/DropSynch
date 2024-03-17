@@ -23,24 +23,23 @@ class StoreInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => 'required'
+            'user_id' => 'required'
         ];
     }
-    
+
     protected function prepareForValidation()
     {
         $carts = Cart::content();
-        
+
         $i = 0;
-        foreach($carts as $key => $cart){
+        foreach ($carts as $key => $cart) {
             $rowId = $cart->rowId;
 
-            if (isset($this->qty[$i])){
+            if (isset($this->qty[$i])) {
                 Cart::update($rowId, $this->qty[$i]);
             }
-            
+
             $i++;
         }
-
-    } 
+    }
 }
