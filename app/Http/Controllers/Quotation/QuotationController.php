@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Quotation;
 
 use App\Enums\QuotationStatus;
 use App\Models\Product;
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\Quotation;
 use App\Models\QuotationDetails;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +30,7 @@ class QuotationController extends Controller
         return view('quotations.create', [
             'cart' => Cart::content('quotation'),
             'products' => Product::all(),
-            'customers' => Customer::all(),
+            'customers' => User::all(),
 
             // maybe?
             //'statuses' => QuotationStatus::cases()
@@ -43,8 +43,8 @@ class QuotationController extends Controller
             $quotation = Quotation::create([
                 'date' => $request->date,
                 'reference' => $request->reference,
-                'customer_id' => $request->customer_id,
-                'customer_name' => Customer::findOrFail($request->customer_id)->name,
+                'user_id' => $request->customer_id,
+                'customer_name' => User::findOrFail($request->customer_id)->name,
                 'tax_percentage' => $request->tax_percentage,
                 'discount_percentage' => $request->discount_percentage,
                 'shipping_amount' => $request->shipping_amount, //* 100,
@@ -83,17 +83,14 @@ class QuotationController extends Controller
 
     public function show()
     {
-
     }
 
     public function edit()
     {
-
     }
 
     public function update()
     {
-
     }
 
     public function destroy(Quotation $quotation)

@@ -34,7 +34,8 @@ class Quotation extends Model
         'status' => QuotationStatus::class
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         static::creating(function ($model) {
@@ -50,7 +51,7 @@ class Quotation extends Model
 
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class);
     }
 
 

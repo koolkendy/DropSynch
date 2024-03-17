@@ -18,7 +18,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'username',
         'email',
         'password',
-        'email_verified_at'
+        'email_verified_at',
+        'phone',
+        'address',
+        'photo',
+        'account_holder',
+        'account_number',
+        'bank_name',
     ];
 
     protected $hidden = [
@@ -35,7 +41,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeSearch($query, $value): void
     {
         $query->where('name', 'like', "%{$value}%")
-            ->orWhere('email', 'like', "%{$value}%");
+            ->orWhere('email', 'like', "%{$value}%")
+            ->orWhere('phone', 'like', "%{$value}%");
     }
 
     public function getRouteKeyName(): string

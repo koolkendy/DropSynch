@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Http\Requests\Customer\StoreCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 
@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all();
+        $customers = User::all();
 
         return view('customers.index', [
             'customers' => $customers
@@ -24,15 +24,14 @@ class CustomerController extends Controller
 
     public function store(StoreCustomerRequest $request)
     {
-        $customer = Customer::create($request->all());
+        $customer = User::create($request->all());
 
         /**
          * Handle upload an image
          */
-        if($request->hasFile('photo'))
-        {
+        if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+            $filename = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
             $file->storeAs('customers/', $filename, 'public');
             $customer->update([
@@ -45,7 +44,7 @@ class CustomerController extends Controller
             ->with('success', 'New customer has been created!');
     }
 
-    public function show(Customer $customer)
+    public function show(User $customer)
     {
         $customer->loadMissing(['quotations', 'orders'])->get();
 
@@ -54,28 +53,28 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function edit(Customer $customer)
+    public function edit(User $customer)
     {
         return view('customers.edit', [
             'customer' => $customer
         ]);
     }
 
-    public function update(UpdateCustomerRequest $request, Customer $customer)
+    public function update(UpdateCustomerRequest $request, User $customer)
     {
         //
         $customer->update($request->except('photo'));
 
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
 
             // Delete Old Photo
-            if($customer->photo){
+            if ($customer->photo) {
                 unlink(public_path('storage/customers/') . $customer->photo);
             }
 
             // Prepare New Photo
             $file = $request->file('photo');
-            $fileName = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
             // Store an image to Storage
             $file->storeAs('customers/', $fileName, 'public');
@@ -91,10 +90,9 @@ class CustomerController extends Controller
             ->with('success', 'Customer has been updated!');
     }
 
-    public function destroy(Customer $customer)
+    public function destroy(User $customer)
     {
-        if($customer->photo)
-        {
+        if ($customer->photo) {
             unlink(public_path('storage/customers/') . $customer->photo);
         }
 

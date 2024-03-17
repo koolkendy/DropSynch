@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('reference');
 
-            $table->foreignIdFor(\App\Models\Customer::class)
+            $table->foreignIdFor(\App\Models\User::class)
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();

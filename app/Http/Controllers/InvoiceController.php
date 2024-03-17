@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Requests\Invoice\StoreInvoiceRequest;
 use App\Http\Requests\Invoice\ResellerInvoiceRequest;
 
 class InvoiceController extends Controller
 {
-    public function create(StoreInvoiceRequest $request, Customer $customer)
+    public function create(StoreInvoiceRequest $request, User $customer)
     {
-        $customer = Customer::where('id', $request->get('customer_id'))
+        $customer = User::where('id', $request->get('customer_id'))
             ->first();
 
         $carts = Cart::content();
@@ -22,10 +22,9 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function resellerCreate(ResellerInvoiceRequest $request, Customer $customer)
+    public function resellerCreate(ResellerInvoiceRequest $request, User $customer)
     {
-        $customer = Customer::where('id', 1)
-            ->first();
+        $customer = auth()->user();
         //for now we use ID:1, we need to change customer_id to be related to the user_id
 
         $carts = Cart::content();

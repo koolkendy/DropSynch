@@ -6,7 +6,7 @@ use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderStoreRequest;
 use App\Models\Category;
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
@@ -58,7 +58,7 @@ class ResellerController extends Controller
     {
         $products = Product::with(['category', 'unit'])->get();
 
-        $customers = Customer::all(['id', 'name']);
+        $customers = User::all(['id', 'name']);
 
         $carts = Cart::content();
 

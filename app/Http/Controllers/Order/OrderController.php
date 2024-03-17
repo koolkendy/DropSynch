@@ -6,7 +6,7 @@ use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderStoreRequest;
 use App\Http\Requests\Order\ResellerOrderStoreRequest;
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
@@ -32,7 +32,7 @@ class OrderController extends Controller
     {
         $products = Product::with(['category', 'unit'])->get();
 
-        $customers = Customer::all(['id', 'name']);
+        $customers = User::all(['id', 'name']);
 
         $carts = Cart::content();
 
@@ -59,7 +59,7 @@ class OrderController extends Controller
             $oDetails['total'] = $content->subtotal;
             $oDetails['created_at'] = Carbon::now();
 
-            
+
             OrderDetails::create($oDetails);
         }
 
@@ -73,7 +73,7 @@ class OrderController extends Controller
 
     public function resellerStore(ResellerOrderStoreRequest $request)
     {
-        
+
         $data = ['customer_id' => '1'];
         $request = $request->merge($data);
 
@@ -91,7 +91,7 @@ class OrderController extends Controller
             $oDetails['total'] = $content->subtotal;
             $oDetails['created_at'] = Carbon::now();
 
-            
+
             OrderDetails::create($oDetails);
         }
 
@@ -108,7 +108,7 @@ class OrderController extends Controller
         $order->loadMissing(['customer', 'details'])->get();
 
         return view('orders.show', [
-           'order' => $order
+            'order' => $order
         ]);
     }
 
@@ -119,9 +119,9 @@ class OrderController extends Controller
         // Reduce the stock
         $ods = $order->details;
         foreach ($ods as $od) {
-           $product = Product::where('id', $od->product_id)->firstOrFail();
+            $product = Product::where('id', $od->product_id)->firstOrFail();
 
-           $product->updateInventory($od->quantity);
+            $product->updateInventory($od->quantity);
         }
 
         $order->update([

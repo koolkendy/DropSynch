@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,7 +25,7 @@ class DueOrderController extends Controller
         $order->loadMissing(['customer', 'details'])->get();
 
         return view('due.show', [
-           'order' => $order
+            'order' => $order
         ]);
     }
 
@@ -33,7 +33,7 @@ class DueOrderController extends Controller
     {
         $order->loadMissing(['customer', 'details'])->get();
 
-        $customers = Customer::select(['id', 'name'])->get();
+        $customers = User::select(['id', 'name'])->get();
 
         return view('due.edit', [
             'order' => $order,
