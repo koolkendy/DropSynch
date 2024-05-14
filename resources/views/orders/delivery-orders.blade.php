@@ -36,7 +36,7 @@
             <div class="card-header">
                 <div>
                     <h3 class="card-title">
-                        {{ __('Orders: Completed') }}
+                        {{ __('Orders: On Delivery') }}
                     </h3>
                 </div>
 
@@ -54,6 +54,7 @@
                 <table class="table table-bordered card-table table-vcenter text-nowrap datatable">
                     <thead class="thead-light">
                         <tr>
+                            <th scope="col" class="text-center">{{ __('Tracking No.') }}</th>
                             <th scope="col" class="text-center">{{ __('No.') }}</th>
                             <th scope="col" class="text-center">{{ __('Invoice No.') }}</th>
                             <th scope="col" class="text-center">{{ __('user') }}</th>
@@ -67,6 +68,7 @@
                     <tbody>
                         @foreach ($orders as $order)
                         <tr>
+                            <td class="text-center">{{ $order->tracking_no }}</td>
                             <td class="text-center">{{ $loop->iteration  }}</td>
                             <td class="text-center">{{ $order->invoice_no }}</td>
                             <td class="text-center">{{ $order->user->name }}</td>

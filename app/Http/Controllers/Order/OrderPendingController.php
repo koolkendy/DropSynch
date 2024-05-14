@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 class OrderPendingController extends Controller
 {
+    
     public function __invoke(Request $request)
     {
         $orders = Order::where('order_status', OrderStatus::PENDING)
@@ -19,4 +20,18 @@ class OrderPendingController extends Controller
             'orders' => $orders
         ]);
     }
+    
+    public function deliveryList(Request $request)
+    {
+        $orders = Order::where('order_status', OrderStatus::ON_DELIVERY)
+            ->with('user')
+            ->latest()
+            ->get();
+
+        return view('orders.delivery-orders', [
+            'orders' => $orders
+        ]);
+    }
+    
+    /** DONT PUT ACTION HERE, ITS NOT WORKING **/
 }

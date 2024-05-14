@@ -112,7 +112,11 @@
                         {{ $product->category->name }}
                     </td>
                     <td class="align-middle text-center">
-                        {{ $product->quantity }}
+                        XS:{{ $product->quantity }},
+                        S:{{ $product->quantity_s }},
+                        M:{{ $product->quantity_m }},
+                        L:{{ $product->quantity_l }},
+                        XL:{{ $product->quantity_xl }}
                     </td>
                     <td class="align-middle text-center" style="width: 10%">
                         <x-button.show class="btn-icon" route="{{ route('products.show', $product) }}" />

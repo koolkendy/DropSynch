@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderStoreRequest;
 use App\Http\Requests\Order\ResellerOrderStoreRequest;
+use App\Http\Requests\Order\OrderDeliveryRequest;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -19,10 +20,20 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function userOrders()
+    {
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+
+        
+        return view('orders.index', [
+            'orders' => $orders
+        ]);
+    }
+    
     public function index()
     {
         $orders = Order::latest()->get();
-
+    
         return view('orders.index', [
             'orders' => $orders
         ]);
@@ -59,7 +70,6 @@ class OrderController extends Controller
             $oDetails['total'] = $content->subtotal;
             $oDetails['created_at'] = Carbon::now();
 
-
             OrderDetails::create($oDetails);
         }
 
@@ -87,6 +97,7 @@ class OrderController extends Controller
             $oDetails['order_id'] = $order['id'];
             $oDetails['product_id'] = $content->id;
             $oDetails['quantity'] = $content->qty;
+            $oDetails['size'] = $content->options['size'];
             $oDetails['unitcost'] = $content->price;
             $oDetails['total'] = $content->subtotal;
             $oDetails['created_at'] = Carbon::now();
@@ -108,8 +119,20 @@ class OrderController extends Controller
         $order->loadMissing(['user', 'details'])->get();
 
         return view('orders.show', [
-            'order' => $order
+            'order' => $order,
         ]);
+    }
+    
+    public function delivery(Order $order, OrderDeliveryRequest $request)
+    {
+        $order->update([
+            'tracking_no' => $request->tracking_no,
+            'order_status' => OrderStatus::ON_DELIVERY
+        ]);
+
+        return redirect()
+            ->route('orders.deliveryList')
+            ->with('success', 'The order is now out for delivery');
     }
 
     public function update(Order $order, Request $request)
@@ -121,7 +144,7 @@ class OrderController extends Controller
         foreach ($ods as $od) {
             $product = Product::where('id', $od->product_id)->firstOrFail();
 
-            $product->updateInventory($od->quantity);
+            $product->updateInventory($od->quantity, $od->size);
         }
 
         $order->update([
@@ -131,6 +154,18 @@ class OrderController extends Controller
         return redirect()
             ->route('orders.complete')
             ->with('success', 'Order has been completed!');
+    }
+    
+    public function cancel(Order $order, Request $request)
+    {
+
+        $order->update([
+            'order_status' => OrderStatus::CANCELED
+        ]);
+
+        return redirect()
+            ->route('orders.pending')
+            ->with('success', 'Order has been canceled!');
     }
 
     public function destroy(Order $order)

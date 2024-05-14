@@ -8,6 +8,7 @@ use App\Http\Controllers\Order\DueOrderController;
 use App\Http\Controllers\Order\OrderCompleteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderPendingController;
+use App\Http\Controllers\Order\OrderCanceledController;
 use App\Http\Controllers\Reseller\ResellerController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\Product\ProductController;
@@ -76,7 +77,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('reseller/createInvoice', [InvoiceController::class, 'resellerCreate'])->name('reseller.createInvoice');
     // Route Orders
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/pending', OrderPendingController::class)->name('orders.pending');
+    
+    
+    Route::get('/orders/pending', OrderPendingController::class, 'index')->name('orders.pending');
+    Route::get('/orders/canceled', OrderCanceledController::class, 'canceled')->name('orders.canceled');
+    Route::get('/orders/deliveryList', [OrderPendingController::class, 'deliveryList'])->name('orders.deliveryList');
     Route::get('/orders/complete', OrderCompleteController::class)->name('orders.complete');
 
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
@@ -88,11 +93,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/reseller/product/{slug}', [ResellerController::class, 'product'])->name('reseller.product');
     Route::post('/reseller/cart/add', [PosController::class, 'resellerAddCartItem'])->name('reseller.resellerAddCartItem');
     Route::get('/reseller/cart', [ResellerController::class, 'cart'])->name('reseller.showCart');
-
+    Route::get('/reseller/inbox', [OrderController::class, 'userOrders'])->name('reseller.inbox');
+    Route::post('/reseller/productComment/{product}', [ResellerController::class, 'productComment'])->name('reseller.productComment');
+    
     // SHOW ORDER
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::put('/orders/update/{order}', [OrderController::class, 'update'])->name('orders.update');
-
+    Route::put('/orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::put('/orders/delivery/{order}', [OrderController::class, 'delivery'])->name('orders.delivery');
     // DUES
     Route::get('due/orders/', [DueOrderController::class, 'index'])->name('due.index');
     Route::get('due/order/view/{order}', [DueOrderController::class, 'show'])->name('due.show');

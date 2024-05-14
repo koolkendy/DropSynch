@@ -71,6 +71,7 @@
                                         <tr>
                                             <th class="text-center">Item</th>
                                             <th class="text-center">Price</th>
+                                            <th class="text-center">Size</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Subtotal</th>
                                         </tr>
@@ -79,27 +80,36 @@
                                         @foreach ($carts as $item)
                                         <tr>
                                             <td class="text-center">{{ $item->name }}</td>
-                                            <td class="text-center">{{ $item->price }}</td>
+                                            <td class="text-center">₱ {{ $item->price }}</td>
+                                            <td class="text-center">{{ $item->options['size'] }}</td>
+                                            
                                             <td class="text-center">{{ $item->qty }}</td>
-                                            <td class="text-center">{{ $item->subtotal }}</td>
+                                            <td class="text-center">₱ {{ $item->subtotal }}</td>
                                         </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                                            <td colspan="4" class="text-end"><strong>Subtotal</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Cart::subtotal() }}</strong>
+                                                <strong>₱ {{ Cart::subtotal() }}</strong>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="text-end"><strong>Tax</strong></td>
+                                            <td colspan="4" class="text-end"><strong>Tax</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Cart::tax() }}</strong>
+                                                <strong>₱ {{ Cart::tax() }}</strong>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td colspan="4" class="text-end"><strong>Shipping Fee:</strong></td>
+                                            <td class="text-center">
+                                                <strong>₱ {{ number_format( $order::computeDeliveryFeeByCartQty(Cart::count()), 2) }} </strong>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                            <td colspan="4" class="text-end"><strong>Total</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Cart::total() }}</strong>
+                                                <strong>₱ {{ number_format( (float)Cart::total(2, '.', '') + $order::computeDeliveryFeeByCartQty(Cart::count()), 2) }}</strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -152,7 +162,7 @@
 
                                 <div class="mb-3">
 
-                                    <x-input.index label="Total Amount" name="total_amount" value="{{ $total }}" disabled />
+                                    <x-input.index label="Total Amount" name="total_amount" value="{{ number_format( (str_replace(',', '', $total) + $order::computeDeliveryFeeByCartQty(Cart::count()))  , 2, '.') }}" disabled />
                                 </div>
 
                             </div>
@@ -174,6 +184,12 @@
                                     </div>
                                     @enderror
                                 </div>
+                                
+                                <div class="mb-3">
+                                    <img style="width: 300px" class="emb-2" src="{{ asset('assets/img/'.$gcash) }}" />
+                                </div>
+                                
+                                
                             </div>
 
                             <div class="col-lg-12">
@@ -196,7 +212,7 @@
 
                             <div class="col-lg-12">
                                 <label for="account_number" class="form-label required">
-                                    {{ __('From Account Number/Name') }}
+                                    {{ __('From Account Number') }}
                                 </label>
 
                                 <input type="text" id="account_number" name="account_number" class="form-control @error('account_number') is-invalid @enderror" value="{{ old('account_number') }}" required>
@@ -207,20 +223,24 @@
                                 </div>
                                 @enderror
                             </div>
-
-
+                            
                             <div class="col-lg-12">
-                                <label for="pay" class="form-label required">
-                                    {{ __('Amount Paid') }}
+                                <label for="account_number" class="form-label required">
+                                    {{ __('From Account Name') }}
                                 </label>
 
-                                <input type="text" id="pay" name="pay" class="form-control @error('pay') is-invalid @enderror" value="{{ old('pay') }}" required>
+                                <input type="text" id="account_name" name="account_name" class="form-control @error('account_name') is-invalid @enderror" value="{{ old('account_name') }}" required>
 
-                                @error('pay')
+                                @error('account_name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                                 @enderror
+                            </div>
+
+                            <div class="col-lg-12">
+                                <br/><br/>
+                                For any issues/concern you can contact us via support@dropsynch.com
                             </div>
                         </div>
                     </div>

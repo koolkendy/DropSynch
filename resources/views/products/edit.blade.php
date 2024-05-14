@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
 
-
+                                    <!--
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="unit_id">
@@ -121,7 +121,7 @@
                                             @enderror
                                         </div>
                                     </div>
-
+                                    -->
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="buying_price">
@@ -156,24 +156,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <label for="quantity" class="form-label">
-                                                {{ __('Quantity') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-
-                                            <input type="number" id="quantity" name="quantity" class="form-control @error('quantity') is-invalid @enderror" min="0" value="{{ old('quantity', $product->quantity) }}" placeholder="0">
-
-                                            @error('quantity')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="mb-3">
                                             <label for="quantity_alert" class="form-label">
                                                 {{ __('Quantity Alert') }}
@@ -189,6 +172,92 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <div class="mb-3">
+                                            <label for="quantity" class="form-label">
+                                                {{ __('Quantity XS') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <input type="number" id="quantity" name="quantity" class="form-control @error('quantity') is-invalid @enderror" min="0" value="{{ old('quantity', $product->quantity) }}" placeholder="0">
+
+                                            @error('quantity')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <div class="mb-3">
+                                            <label for="quantity_s" class="form-label">
+                                                {{ __('Quantity S') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <input type="number" id="quantity_s" name="quantity_s" class="form-control @error('quantity_s') is-invalid @enderror" min="0" value="{{ old('quantity_s', $product->quantity_s) }}" placeholder="0">
+
+                                            @error('quantity_s')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <div class="mb-3">
+                                            <label for="quantity_m" class="form-label">
+                                                {{ __('Quantity M') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <input type="number" id="quantity_m" name="quantity_m" class="form-control @error('quantity_m') is-invalid @enderror" min="0" value="{{ old('quantity_m', $product->quantity_m) }}" placeholder="0">
+
+                                            @error('quantity_m')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <div class="mb-3">
+                                            <label for="quantity_l" class="form-label">
+                                                {{ __('Quantity L') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <input type="number" id="quantity_l" name="quantity_l" class="form-control @error('quantity_l') is-invalid @enderror" min="0" value="{{ old('quantity_l', $product->quantity_l) }}" placeholder="0">
+
+                                            @error('quantity_l')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <div class="mb-3">
+                                            <label for="quantity_xl" class="form-label">
+                                                {{ __('Quantity XL') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <input type="number" id="quantity_xl" name="quantity_xl" class="form-control @error('quantity_xl') is-invalid @enderror" min="0" value="{{ old('quantity_xl', $product->quantity_xl) }}" placeholder="0">
+
+                                            @error('quantity_xl')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
                                     <!--
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">

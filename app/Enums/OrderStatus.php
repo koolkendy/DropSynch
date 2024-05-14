@@ -17,6 +17,7 @@ enum OrderStatus: int
             self::WAITING_FOR_PAYMENT => __('Waiting For Payment'),
             self::ON_DELIVERY => __('On Delivery'),
             self::COMPLETE => __('Complete'),
+            self::CANCELED => __('Canceled')
         };
     }
 }

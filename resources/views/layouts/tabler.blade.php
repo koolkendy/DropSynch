@@ -269,6 +269,9 @@
                                             <a class="dropdown-item" href="{{ route('orders.index') }}">
                                                 {{ __('All') }}
                                             </a>
+                                            <a class="dropdown-item" href="{{ route('orders.deliveryList') }}">
+                                                {{ __('On Delivery') }}
+                                            </a>
                                             <a class="dropdown-item" href="{{ route('orders.complete') }}">
                                                 {{ __('Completed') }}
                                             </a>

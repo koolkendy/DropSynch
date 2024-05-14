@@ -48,25 +48,34 @@ class ProductController extends Controller
     {
         $data = ['user_id' => auth()->user()->id];
         $request = $request->merge($data);
-
-        $product = Product::create($request->all());
-
+        
         /**
          * Handle upload image
          */
         if ($request->hasFile('product_image')) {
             $file = $request->file('product_image');
             $filename = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-
-            $file->storeAs('products/', $filename, 'public');
+                
+            //var_dump(env('APP_URL'));
+            //var_dump($file->storeAs('products', $filename, 'public')); exit;
+            $file->storeAs('products', $filename, 'public');
+            $product = Product::create($request->all());
             $product->update([
                 'product_image' => $filename
             ]);
+        }else{
+            $product = Product::create($request->all());
         }
-
+        
+        if ($product) {
         return redirect()
             ->back()
             ->with('success', 'Product has been created!');
+        } else {
+                return redirect()
+            ->back()
+            ->with('error', 'Unable to create product!');
+        }
     }
 
     public function show(Product $product)
@@ -84,6 +93,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        
         return view('products.edit', [
             'categories' => Category::all(),
             'units' => Unit::all(),
@@ -99,7 +109,13 @@ class ProductController extends Controller
 
             // Delete Old Photo
             if ($product->product_image) {
-                unlink(public_path('storage/products/') . $product->product_image);
+                
+                $filename = public_path('storage/products/') . $product->product_image;
+                
+
+                if(file_exists($filename)){
+                    unlink($filename);
+                }
             }
 
             // Prepare New Photo
@@ -107,7 +123,7 @@ class ProductController extends Controller
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
 
             // Store an image to Storage
-            $file->storeAs('products/', $fileName, 'public');
+            $file->storeAs('products', $fileName, 'public');
 
             // Save DB
             $product->update([
@@ -126,7 +142,12 @@ class ProductController extends Controller
          * Delete photo if exists.
          */
         if ($product->product_image) {
-            unlink(public_path('storage/products/') . $product->product_image);
+            
+            $filename = public_path('storage/products/') . $product->product_image;
+                
+            if(file_exists($filename)){
+                unlink($filename);
+            }
         }
 
         $product->delete();

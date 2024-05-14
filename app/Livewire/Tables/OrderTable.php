@@ -31,12 +31,24 @@ class OrderTable extends Component
 
     public function render()
     {
-        return view('livewire.tables.order-table', [
-            'orders' => Order::query()
+                
+        if (auth()->user()->id < 1000) {
+            $orderQuery = Order::query()
                 ->with(['user', 'details'])
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage)
+                ->paginate($this->perPage);
+        } else {
+            $orderQuery = Order::query()
+                ->with(['user', 'details'])
+                ->where('user_id', auth()->user()->id)
+                ->search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+        }
+        
+        return view('livewire.tables.order-table', [
+            'orders' => $orderQuery
         ]);
     }
 }

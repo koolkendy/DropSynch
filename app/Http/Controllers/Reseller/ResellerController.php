@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\ProductComments;
 use App\Models\Unit;
 use App\Models\Color;
 use Carbon\Carbon;
@@ -25,11 +26,11 @@ class ResellerController extends Controller
     {
         $categoryTitle = '';
         if ($slug !== null) {
-            $category = Category::where('slug', $slug)->firstOrFail();
+            $category = Category::where('slug', $slug)->with('products.user')->firstOrFail();
             $categoryTitle = $category->name;
             $products = $category->products;
         } else {
-            $products = Product::with(['category', 'unit'])->get();
+            $products = Product::with(['category', 'unit','user'])->get();
         }
 
         $categories = Category::all(['id', 'name', 'slug']);
@@ -48,12 +49,15 @@ class ResellerController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
         $units = Unit::all();
         $colors = Color::all();
-
+        $productComment = new ProductComments;
+        $productReviews = ProductComments::with(['product'])->where('product_id', $product->id)->get();
         return view('reseller.product', [
             'categories' => Category::all(),
             'product' => $product,
             'units' => $units,
             'colors' => $colors,
+            'productComment' => $productComment,
+            'productReviews' => $productReviews
         ]);
     }
 
@@ -64,11 +68,12 @@ class ResellerController extends Controller
         $users = User::all(['id', 'name']);
 
         $carts = Cart::content();
-
+        $order = new Order;
         return view('reseller.cart', [
             'products' => $products,
             'users' => $users,
             'carts' => $carts,
+            'order' => $order
         ]);
     }
 
@@ -146,5 +151,15 @@ class ResellerController extends Controller
         return view('orders.print-invoice', [
             'order' => $order,
         ]);
+    }
+    
+    public function productComment(Product $product, Request $request)
+    {
+        $productComment = new ProductComments;
+        $productComment->product_id = $product->id;
+        $productComment->message = $request->productComment;
+        $productComment->save();
+        
+        return redirect()->back();
     }
 }

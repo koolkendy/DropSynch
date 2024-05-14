@@ -60,55 +60,73 @@
                                 </article>
                             </aside>
                             <aside class="col-sm-7">
-                                <article class="p-5">
-                                    <h3 class="title mb-3">{{ $product->name }}</h3>
-                                    <dl class="row">
-                                        <dt class="col-sm-3">Size: </dt>
-                                        <dd class="col-sm-9">
-                                            <select name="unit_id" id="unit_id" class="form-select @error('unit_id') is-invalid @enderror" readonly>
-                                                @foreach ($units as $unit)
-                                                <option value="{{ $unit->id }}" selected>
-                                                    {{ $unit->name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </dd>
-                                        <dt class="col-sm-3">Color: </dt>
-                                        <dd class="col-sm-9">
-                                            <select name="color_id" id="color_id" class="form-select @error('color_id') is-invalid @enderror" readonly>
-                                                @foreach ($colors as $color)
-                                                <option value="{{ $color->id }}" selected>
-                                                    {{ $color->name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </dd>
-                                    </dl>
-                                    <div class="mb-3">
-                                        <var class="price h3 text-success">
-                                            <span class="currency">₱</span><span class="num" id="productPrice">{{ $product->selling_price }}</span>
-                                        </var>
-                                    </div>
-                                    <hr>
-                                    <form action="{{ route('reseller.resellerAddCartItem') }}" method="POST" role="form" id="addToCart">
+                                
+                                <form action="{{ route('reseller.resellerAddCartItem') }}" method="POST" role="form" id="addToCart">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <dl class="dlist-inline">
-                                                    <dt>Quantity: </dt>
-                                                    <dd>
-                                                        <input class="form-control" type="number" min="1" value="1" max="{{ $product->quantity }}" name="qty" style="width:70px;">
-                                                        <input type="hidden" name="id" value="{{ $product->id }}">
-                                                        <input type="hidden" name="name" value="{{ $product->name }}">
-                                                        <input type="hidden" name="selling_price" value="{{ $product->selling_price }}">
-                                                    </dd>
-                                                </dl>
-                                            </div>
+                                    <article class="p-5">
+                                        <div class="mb-2">
+                                            <span style="font-size: 10px;">{{$product->user->name}}</span>
+                                        </div>
+                                        <h3 class="title mb-3">{{ $product->name }}</h3>
+                                        <dl class="row">
+                                            <dt class="col-sm-3">Size: </dt>
+                                            <dd class="col-sm-9">
+                                                <select name="unit" id="unit" class="form-select @error('unit') is-invalid @enderror">
+                                                    @if ($product->quantity > 0)
+                                                    <option value="XS" >
+                                                        Extra Small - Qty:{{$product->quantity}}
+                                                    </option>
+                                                    @endif
+                                                    
+                                                    @if ($product->quantity_s > 0)
+                                                    <option value="S" >
+                                                        Small - Qty:{{$product->quantity_s}}
+                                                    </option>
+                                                    @endif
+                                                    
+                                                    @if ($product->quantity_m > 0)
+                                                    <option value="M" >
+                                                        Medium - Qty:{{$product->quantity_m}}
+                                                    </option>
+                                                    @endif
+                                                    
+                                                    @if ($product->quantity_l > 0)
+                                                    <option value="L" >
+                                                        Large - Qty:{{$product->quantity_l}}
+                                                    </option>
+                                                    @endif
+                                                    
+                                                    @if ($product->quantity_xl > 0)
+                                                    <option value="XL" >
+                                                        Extra Large - Qty:{{$product->quantity_xl}}
+                                                    </option>
+                                                    @endif
+                                                </select>
+                                            </dd>
+                                        </dl>
+                                        <div class="mb-3">
+                                            <var class="price h3 text-success">
+                                                <span class="currency">₱</span><span class="num" id="productPrice">{{ $product->selling_price }}</span>
+                                            </var>
                                         </div>
                                         <hr>
-                                        <button type="submit" class="btn btn-success"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
-                                    </form>
-                                </article>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <dl class="dlist-inline">
+                                                        <dt>Quantity: </dt>
+                                                        <dd>
+                                                            <input class="form-control" type="number" min="1" value="1"name="qty" style="width:70px;"> <!--  max="{{ $product->quantity }}"  -->
+                                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                                            <input type="hidden" name="selling_price" value="{{ $product->selling_price }}">
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
+                                    </article>
+                                </form>
                             </aside>
                         </div>
                     </div>
@@ -121,10 +139,41 @@
 
                             {!! $product->notes !!}
 
-                            <br>
-                            <br>
-
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="col-md-12 mt-2">
+                    <form action="{{ route('reseller.productComment', $product) }}" method="POST" role="form" id="productComment">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <dl class="dlist-inline">
+                                    <dt>Leave a comment about this product: </dt>
+                                    <dd>
+                                        <input class="form-control" type="text" value="{{ $productComment->message }}" name="productComment" style="width:100%">
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit Comment</button>
+                    </form>
+                </div>
+                
+                <div class="col-md-12">
+                    <article class="card mt-4">
+                        <div class="card-body">
+                            
+                            <b>Product Reviews:</b> <br/><br/>
+                            
+                            @foreach ($productReviews as $productReview)
+                            <div>
+                                Comment ID: {{$productReview->id}} <br/>
+                                Message: {{ $productReview->message }}
+                            </div>
+                            <hr/>
+                            @endforeach
+                            
                         </div>
                     </article>
                 </div>

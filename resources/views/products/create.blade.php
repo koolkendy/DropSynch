@@ -60,7 +60,7 @@
                                         <x-input name="name" id="name" placeholder="Product name" value="{{ old('name') }}" />
                                     </div>
 
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="mb-3">
                                             <label for="category_id" class="form-label">
                                                 Product category
@@ -96,7 +96,8 @@
                                             @enderror
                                         </div>
                                     </div>
-
+                                    
+                                    <!--
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="unit_id">
@@ -104,6 +105,7 @@
                                                 <span class="text-danger">*</span>
                                             </label>
 
+                                            
                                             @if ($units->count() === 1)
                                             <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" readonly>
                                                 @foreach ($units as $unit)
@@ -131,6 +133,7 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    -->
 
                                     <div class="col-sm-6 col-md-6">
                                         <x-input type="number" label="Buying Price" name="buying_price" id="buying_price" placeholder="0" value="{{ old('buying_price') }}" />
@@ -140,14 +143,30 @@
                                         <x-input type="number" label="Selling Price" name="selling_price" id="selling_price" placeholder="0" value="{{ old('selling_price') }}" />
                                     </div>
 
-                                    <div class="col-sm-6 col-md-6">
-                                        <x-input type="number" label="Quantity" name="quantity" id="quantity" placeholder="0" value="{{ old('quantity') }}" />
-                                    </div>
-
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-12 col-md-12">
                                         <x-input type="number" label="Quantity Alert" name="quantity_alert" id="quantity_alert" placeholder="0" value="{{ old('quantity_alert') }}" />
                                     </div>
-
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <x-input type="number" label="Quantity XS " name="quantity" id="quantity" placeholder="0" value="{{ old('quantity') }}" />
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <x-input type="number" label="Quantity S" name="quantity_s" id="quantity_s" placeholder="0" value="{{ old('quantity_s') }}" />
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <x-input type="number" label="Quantity M" name="quantity_m" id="quantity_m" placeholder="0" value="{{ old('quantity_m') }}" />
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <x-input type="number" label="Quantity L" name="quantity_l" id="quantity_l" placeholder="0" value="{{ old('quantity_l') }}" />
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-sm-offset-6">
+                                        <x-input type="number" label="Quantity XL" name="quantity_xl" id="quantity_xl" placeholder="0" value="{{ old('quantity_xl') }}" />
+                                    </div>
+                                    
                                     <!--
                                     <div class="col-sm-6 col-md-6">
                                         <x-input type="number"

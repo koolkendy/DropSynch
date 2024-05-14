@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class Order extends Model
 {
@@ -25,8 +26,11 @@ class Order extends Model
         'payment_type',
         'reference_number',
         'account_number',
+        'account_name',
+        'tracking_no',
         'pay',
         'due',
+        'shipping_fee'
     ];
 
     protected $casts = [
@@ -51,5 +55,18 @@ class Order extends Model
         $query->where('invoice_no', 'like', "%{$value}%")
             ->orWhere('order_status', 'like', "%{$value}%")
             ->orWhere('payment_type', 'like', "%{$value}%");
+    }
+    
+    
+    
+    public static function computeDeliveryFeeByCartQty(int $qty): float{
+        $delFee  = 250;
+        $addDelFee = ((Cart::count() / 10) * 100);
+        
+        if ($qty > 10) {
+            $delFee = $delFee + $addDelFee;
+        }
+        
+        return $delFee;
     }
 }

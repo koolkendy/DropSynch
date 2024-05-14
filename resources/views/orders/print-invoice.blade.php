@@ -56,9 +56,9 @@
                                 <div class="col-sm-6 mb-50">
                                     <h4 class="inv-title-1">Customer</h4>
                                     <p class="inv-from-1">{{ $order->user->name }}</p>
-                                    <p class="inv-from-1">{{ $order->customer->phone }}</p>
-                                    <p class="inv-from-1">{{ $order->customer->email }}</p>
-                                    <p class="inv-from-2">{{ $order->customer->address }}</p>
+                                    <p class="inv-from-1">{{ $order->user->phone }}</p>
+                                    <p class="inv-from-1">{{ $order->user->email }}</p>
+                                    <p class="inv-from-2">{{ $order->user->address }}</p>
                                 </div>
                                 <div class="col-sm-6 text-end mb-50">
                                     <h4 class="inv-title-1">Store</h4>
@@ -76,6 +76,7 @@
                                         <tr>
                                             <th class="align-middle">Item</th>
                                             <th class="align-middle text-center">Price</th>
+                                            <th class="align-middle text-center">Size</th>
                                             <th class="align-middle text-center">Quantity</th>
                                             <th class="align-middle text-center">Subtotal</th>
                                         </tr>
@@ -92,6 +93,9 @@
                                                 {{ Number::currency($item->unitcost, 'PHP') }}
                                             </td>
                                             <td class="align-middle text-center">
+                                                {{ $item->size }}
+                                            </td>
+                                            <td class="align-middle text-center">
                                                 {{ $item->quantity }}
                                             </td>
                                             <td class="align-middle text-center">
@@ -101,7 +105,7 @@
                                         @endforeach
 
                                         <tr>
-                                            <td colspan="3" class="text-end">
+                                            <td colspan="4" class="text-end">
                                                 <strong>
                                                     Subtotal
                                                 </strong>
@@ -113,7 +117,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="text-end">
+                                            <td colspan="4" class="text-end">
                                                 <strong>Tax</strong>
                                             </td>
                                             <td class="align-middle text-center">
@@ -123,7 +127,18 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="text-end">
+                                            <td colspan="4" class="text-end">
+                                                <strong>Delivery Fee</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    {{ Number::currency($order->shipping_fee, 'PHP') }}
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td colspan="4" class="text-end">
                                                 <strong>Total</strong>
                                             </td>
                                             <td class="align-middle text-center">

@@ -63,11 +63,12 @@ class PosController extends Controller
     public function resellerAddCartItem(Request $request)
     {
         $request->all();
-        //dd($request);
+        //dd($t); exit;
 
         $rules = [
             'id' => 'required|numeric',
             'name' => 'required|string',
+            'unit' => 'required|string',
             'selling_price' => 'required|numeric',
             'qty' => 'required|numeric',
         ];
@@ -80,7 +81,7 @@ class PosController extends Controller
             $validatedData['qty'],
             $validatedData['selling_price'],
             1,
-            (array)$options = null
+            (array)$options = ['size' => $validatedData['unit']]
         );
 
         return redirect()->route('reseller.showCart');

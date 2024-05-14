@@ -36,7 +36,7 @@
             <div class="card-header">
                 <div>
                     <h3 class="card-title">
-                        {{ __('Orders: Completed') }}
+                        {{ __('Orders: Canceled') }}
                     </h3>
                 </div>
 
@@ -54,6 +54,7 @@
                 <table class="table table-bordered card-table table-vcenter text-nowrap datatable">
                     <thead class="thead-light">
                         <tr>
+                            <th scope="col" class="text-center">{{ __('Tracking No.') }}</th>
                             <th scope="col" class="text-center">{{ __('No.') }}</th>
                             <th scope="col" class="text-center">{{ __('Invoice No.') }}</th>
                             <th scope="col" class="text-center">{{ __('user') }}</th>
@@ -67,6 +68,7 @@
                     <tbody>
                         @foreach ($orders as $order)
                         <tr>
+                            <td class="text-center">{{ $order->tracking_no }}</td>
                             <td class="text-center">{{ $loop->iteration  }}</td>
                             <td class="text-center">{{ $order->invoice_no }}</td>
                             <td class="text-center">{{ $order->user->name }}</td>
@@ -74,7 +76,7 @@
                             <td class="text-center">{{ $order->payment_type }}</td>
                             <td class="text-center">{{ Number::currency($order->total + $order->shipping_fee, 'PHP') }}</td>
                             <td class="text-center">
-                                <span class="badge bg-green text-white text-uppercase">
+                                <span class="badge bg-danger text-white text-uppercase">
                                     {{ $order->order_status->label() }}
                                 </span>
                             </td>
@@ -84,14 +86,6 @@
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
                                         <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('order.downloadInvoice', $order) }}" class="btn btn-icon btn-outline-warning">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
-                                        <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
-                                        <path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" />
                                     </svg>
                                 </a>
                             </td>

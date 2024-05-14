@@ -75,6 +75,10 @@
 
                             <span class="price-old">| Qty: {{$product->quantity}}</span>
                         </div> <!-- price-wrap.// -->
+                        
+                        <div class="mb-2">
+                            <span style="font-size: 10px;">{{$product->user->name}}</span>
+                        </div> <!-- price-wrap.// -->
                     </div>
 
                     <a href="{{ url('reseller/product', ['slug' => $product->slug]) }}" class="btn btn-block btn-primary">View Details</a>

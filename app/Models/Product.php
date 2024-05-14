@@ -20,6 +20,10 @@ class Product extends Model
         'slug',
         'code',
         'quantity',
+        'quantity_s',
+        'quantity_m',
+        'quantity_l',
+        'quantity_xl',
         'quantity_alert',
         'buying_price',
         'selling_price',
@@ -28,7 +32,6 @@ class Product extends Model
         'notes',
         'product_image',
         'category_id',
-        'unit_id',
         'created_at',
         'updated_at'
     ];
@@ -43,7 +46,12 @@ class Product extends Model
     {
         return 'slug';
     }
-
+    
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -76,14 +84,21 @@ class Product extends Model
             ->orWhere('code', 'like', "%{$value}%");
     }
 
-    public function updateInventory(int $quantity)
+    public function updateInventory(int $quantity, string $size)
     {
-        if ($this->quantity < $quantity) {
+        $loweredSize = strtolower($size);
+        if($loweredSize === 'xs')
+            $quantityWithSuffix = 'quantity';
+        else
+            $quantityWithSuffix = 'quantity_'.$loweredSize; // size S;
+        
+        $quantityProperty = $this->{$quantityWithSuffix};
+        if ($quantityProperty < $quantity) {
             throw new \Exception("Insufficient stock available");
         }
 
         $this->update([
-            'quantity' => $this->quantity - $quantity,
+            $quantityWithSuffix => $quantityProperty - $quantity,
         ]);
     }
 }
